@@ -2,12 +2,173 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Duco Gaillard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gaillard Systems - AI/ML Engineering</title>
+    <meta name="description" content="Freelance AI/ML Engineer specializing in search systems, RAG implementations, and secure AI assistant architecture." />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --green: #1a3a2f;
+        --cream: #f8f6f3;
+        --charcoal: #2d2d2d;
+        --sage: #4a5d52;
+        --border: #e0dcd6;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        background-color: var(--cream);
+        color: var(--charcoal);
+        line-height: 1.7;
+        font-size: 18px;
+      }
+
+      .container {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 80px 24px;
+      }
+
+      header {
+        margin-bottom: 80px;
+      }
+
+      .logo {
+        max-width: 280px;
+        height: auto;
+      }
+
+      .intro {
+        margin-bottom: 80px;
+      }
+
+      .intro h1 {
+        font-size: 1.4rem;
+        font-weight: 500;
+        color: var(--green);
+        margin-bottom: 16px;
+        letter-spacing: 0.02em;
+      }
+
+      .intro p {
+        color: var(--sage);
+        max-width: 540px;
+      }
+
+      .services {
+        margin-bottom: 80px;
+      }
+
+      .services h2 {
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--sage);
+        margin-bottom: 32px;
+      }
+
+      .service {
+        padding: 24px 0;
+        border-top: 1px solid var(--border);
+      }
+
+      .service:last-child {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .service h3 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--green);
+        margin-bottom: 8px;
+      }
+
+      .service p {
+        color: var(--sage);
+        font-size: 1rem;
+      }
+
+      .contact h2 {
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--sage);
+        margin-bottom: 16px;
+      }
+
+      .contact a {
+        color: var(--green);
+        text-decoration: none;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 2px;
+        transition: border-color 0.2s;
+      }
+
+      .contact a:hover {
+        border-color: var(--green);
+      }
+
+      @media (max-width: 600px) {
+        body {
+          font-size: 16px;
+        }
+
+        .container {
+          padding: 48px 20px;
+        }
+
+        header, .intro, .services {
+          margin-bottom: 56px;
+        }
+
+        .logo {
+          max-width: 220px;
+        }
+      }
+    </style>
   </head>
   <body>
-    <h1>Duco Gaillard</h1>
+    <div class="container">
+      <header>
+        <img src="Gaillard Systems Logo Design.png" alt="Gaillard Systems" class="logo" />
+      </header>
 
-    <p>Email: <span id="email"></span></p>
+      <section class="intro">
+        <h1>Freelance AI/ML Engineer</h1>
+        <p>I build AI systems that actually work in production. Background in cancer research at the Netherlands Cancer Institute, now focused on search systems and secure AI infrastructure for organizations.</p>
+      </section>
+
+      <section class="services">
+        <h2>What I Do</h2>
+
+        <div class="service">
+          <h3>AI Search Systems</h3>
+          <p>RAG and graph RAG implementations for internal knowledge bases. Making your organization's information findable and useful.</p>
+        </div>
+
+        <div class="service">
+          <h3>AI Assistant Architecture</h3>
+          <p>Internal AI tools with proper data security and permission-aware access. Built for sensitive environments.</p>
+        </div>
+
+        <div class="service">
+          <h3>Hardware Consulting</h3>
+          <p>Sizing and deployment strategy for local AI. Helping you decide between cloud and on-premise, and making it work.</p>
+        </div>
+      </section>
+
+      <section class="contact">
+        <h2>Contact</h2>
+        <p><span id="email"></span></p>
+      </section>
+    </div>
 
     <script>
       // Basic anti-scrape: build the address at runtime
