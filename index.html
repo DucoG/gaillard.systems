@@ -6,6 +6,20 @@
   </head>
   <body>
     <h1>Duco Gaillard</h1>
-    <p>Email: <a href="mailto:duco@gaillard.systems">duco@gaillard.systems</a></p>
+
+    <p>Email: <span id="email"></span></p>
+
+    <script>
+      // Basic anti-scrape: build the address at runtime
+      const user = "duco";
+      const domain = "gaillard.systems";
+      const addr = `${user}@${domain}`;
+
+      const a = document.createElement("a");
+      a.href = `mailto:${addr}`;
+      a.textContent = addr;
+
+      document.getElementById("email").appendChild(a);
+    </script>
   </body>
 </html>
