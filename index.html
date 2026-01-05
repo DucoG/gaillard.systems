@@ -29,13 +29,23 @@
       }
 
       .container {
-        max-width: 720px;
+        max-width: 900px;
         margin: 0 auto;
-        padding: 80px 24px;
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: clamp(12px, 2vh, 48px) 24px;
+        gap: clamp(12px, 3vh, 48px);
       }
 
       header {
-        margin-bottom: 80px;
+        margin-bottom: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
       }
 
       .logo {
@@ -43,8 +53,12 @@
         height: auto;
       }
 
+      header .contact {
+        margin: 0;
+      }
+
       .intro {
-        margin-bottom: 80px;
+        margin-bottom: 0;
       }
 
       .intro h1 {
@@ -61,7 +75,7 @@
       }
 
       .services {
-        margin-bottom: 80px;
+        margin-bottom: 0;
       }
 
       .services h2 {
@@ -70,11 +84,11 @@
         text-transform: uppercase;
         letter-spacing: 0.1em;
         color: var(--sage);
-        margin-bottom: 32px;
+        margin-bottom: clamp(12px, 2vh, 32px);
       }
 
       .service {
-        padding: 24px 0;
+        padding: clamp(12px, 1.5vh, 24px) 0;
         border-top: 1px solid var(--border);
       }
 
@@ -94,13 +108,9 @@
         font-size: 1rem;
       }
 
-      .contact h2 {
-        font-size: 0.85rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: var(--sage);
-        margin-bottom: 16px;
+      .services-grid {
+        display: flex;
+        flex-direction: column;
       }
 
       .contact a {
@@ -115,17 +125,33 @@
         border-color: var(--green);
       }
 
+      /* Wide screens: services in 3 columns */
+      @media (min-width: 900px) {
+        .services-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 24px;
+        }
+
+        .service {
+          border-top: none;
+          border-bottom: none;
+          padding: 0;
+        }
+
+        .service:last-child {
+          border-bottom: none;
+        }
+      }
+
+      /* Mobile adjustments */
       @media (max-width: 600px) {
         body {
           font-size: 16px;
         }
 
         .container {
-          padding: 48px 20px;
-        }
-
-        header, .intro, .services {
-          margin-bottom: 56px;
+          padding: clamp(12px, 2vh, 48px) 20px;
         }
 
         .logo {
@@ -138,35 +164,32 @@
     <div class="container">
       <header>
         <img src="Gaillard Systems Logo Design.png" alt="Gaillard Systems" class="logo" />
+        <p class="contact"><span id="email"></span></p>
       </header>
 
       <section class="intro">
         <h1>Freelance AI/ML Engineer</h1>
-        <p>I build AI systems that actually work in production. Background in cancer research at the Netherlands Cancer Institute, now focused on search systems and secure AI infrastructure for organizations.</p>
+        <p>PhD in AI for cancer research at the Netherlands Cancer Institute. Now helping organizations build AI systems that work.</p>
       </section>
 
       <section class="services">
         <h2>What I Do</h2>
+        <div class="services-grid">
+          <div class="service">
+            <h3>Data Science</h3>
+            <p>Complex analysis, modeling, and ML pipelines. From messy data to actionable insights.</p>
+          </div>
 
-        <div class="service">
-          <h3>AI Search Systems</h3>
-          <p>RAG and graph RAG implementations for internal knowledge bases. Making your organization's information findable and useful.</p>
+          <div class="service">
+            <h3>AI Agents</h3>
+            <p>Building autonomous systems that reason, search, and act. RAG, tool use, and multi-agent architectures.</p>
+          </div>
+
+          <div class="service">
+            <h3>Hardware Consulting</h3>
+            <p>Sizing and deployment for local AI. Helping you choose between cloud and on-premise, and making it work.</p>
+          </div>
         </div>
-
-        <div class="service">
-          <h3>AI Assistant Architecture</h3>
-          <p>Internal AI tools with proper data security and permission-aware access. Built for sensitive environments.</p>
-        </div>
-
-        <div class="service">
-          <h3>Hardware Consulting</h3>
-          <p>Sizing and deployment strategy for local AI. Helping you decide between cloud and on-premise, and making it work.</p>
-        </div>
-      </section>
-
-      <section class="contact">
-        <h2>Contact</h2>
-        <p><span id="email"></span></p>
       </section>
     </div>
 
