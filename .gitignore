@@ -2,3 +2,7 @@ context/
 .claude/
 
 CLAUDE.md
+
+.DS_store
+
+citations.csv
