@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Gaillard Systems - AI for Early Cancer Detection</title>
     <meta name="description" content="Building deep learning systems for liquid biopsy cancer detection. PhD researcher at Netherlands Cancer Institute specializing in cfDNA fragmentomics." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
     <style>
       * {
         margin: 0;
@@ -39,21 +42,38 @@
       }
 
       header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 12px;
+        display: block;
       }
 
       .logo {
-        max-width: 240px;
-        height: auto;
+        font-family: "Libre Baskerville", Georgia, serif;
+        font-size: 3.25rem;
+        font-weight: 700;
+        color: var(--green);
+        text-decoration: none;
+        letter-spacing: 0.02em;
+        line-height: 1.2;
       }
 
       /* Hero Section */
       .hero {
         padding: clamp(24px, 4vh, 48px) 0;
+        display: flex;
+        align-items: center;
+        gap: 32px;
+      }
+
+      .headshot {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid var(--border);
+        flex-shrink: 0;
+      }
+
+      .hero-text {
+        flex: 1;
       }
 
       .hero h1 {
@@ -110,6 +130,64 @@
         margin-top: 1.5em;
         padding-top: 1.5em;
         border-top: 1px solid var(--border);
+      }
+
+      /* Publications Section */
+      .publications {
+        padding: clamp(24px, 4vh, 48px) 0;
+        border-top: 1px solid var(--border);
+      }
+
+      .publications h2 {
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--sage);
+        margin-bottom: clamp(16px, 3vh, 32px);
+      }
+
+      .publication {
+        margin-bottom: 24px;
+      }
+
+      .publication:last-child {
+        margin-bottom: 0;
+      }
+
+      .publication-title {
+        font-weight: 500;
+        color: var(--green);
+        line-height: 1.4;
+        margin-bottom: 6px;
+      }
+
+      .publication-title a {
+        color: inherit;
+        text-decoration: none;
+        border-bottom: 1px solid var(--border);
+        transition: border-color 0.2s;
+      }
+
+      .publication-title a:hover {
+        border-color: var(--green);
+      }
+
+      .publication-authors {
+        font-size: 0.9rem;
+        color: var(--sage);
+        margin-bottom: 4px;
+      }
+
+      .publication-authors .me {
+        color: var(--charcoal);
+        font-weight: 500;
+      }
+
+      .publication-venue {
+        font-size: 0.9rem;
+        color: var(--sage);
+        font-style: italic;
       }
 
       /* Services Section */
@@ -217,7 +295,17 @@
         }
 
         .logo {
-          max-width: 200px;
+          font-size: 2rem;
+        }
+
+        .hero {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .headshot {
+          width: 140px;
+          height: 140px;
         }
 
         .hero h1 {
@@ -229,21 +317,46 @@
   <body>
     <div class="container">
       <header>
-        <img src="Gaillard Systems Logo Design.png" alt="Gaillard Systems" class="logo" />
+        <span class="logo">Gaillard Systems</span>
       </header>
 
       <section class="hero">
-        <h1>Building AI that detects cancer before symptoms appear.</h1>
-        <p>PhD researcher at Netherlands Cancer Institute. Developing deep learning systems for liquid biopsy analysis using cfDNA fragmentomics.</p>
+        <img src="duco.jpg" alt="Duco Gaillard" class="headshot" />
+        <div class="hero-text">
+          <h1>Building AI that detects cancer before symptoms appear.</h1>
+          <p>PhD researcher at Netherlands Cancer Institute. Developing deep learning systems for liquid biopsy analysis using cfDNA fragmentomics.</p>
+        </div>
       </section>
 
       <section class="vision">
         <h2>What I'm Building</h2>
         <div class="vision-content">
-          <p><span class="highlight">Cancer detected early is often curable. Detected late, it's often fatal.</span></p>
+          <p><span class="highlight">Cancer detected early is often curable. Detected late, it can be fatal.</span></p>
           <p>My PhD research at the Netherlands Cancer Institute focused on finding cancer signals in cell-free DNA using fragmentomics and deep learning. The patterns are there in the blood—invisible to traditional methods, but detectable with the right models.</p>
           <p>I'm building a system to make this accessible: liquid biopsy analysis that could integrate into routine blood work, catching cancers at stage 1 when survival rates are dramatically higher.</p>
           <p class="stage">Currently developing the prototype. Consulting on AI systems to fund the R&D.</p>
+        </div>
+      </section>
+
+      <section class="publications">
+        <h2>Publications</h2>
+
+        <div class="publication">
+          <div class="publication-title"><a href="https://doi.org/10.1136/ijgc-2023-005100" target="_blank">Evaluating the effectiveness of pre-operative diagnosis of ovarian cancer using minimally invasive liquid biopsies by combining serum human epididymis protein 4 and cell-free DNA in patients with an ovarian mass</a></div>
+          <div class="publication-authors"><span class="me">Gaillard DHK</span>, Lof P, Sistermans EA, Mokveld T, Horlings HM, Mom CH, Reinders MJT, Amant F, Van Den Broek D, Wessels LFA</div>
+          <div class="publication-venue">International Journal of Gynecological Cancer, 2024</div>
+        </div>
+
+        <div class="publication">
+          <div class="publication-title"><a href="https://doi.org/10.1093/icvts/ivad126" target="_blank">Virtual surgery to predict optimized conduit size for adult Fontan patients with 16-mm conduits</a></div>
+          <div class="publication-authors">Hut T, Roest A, <span class="me">Gaillard D</span>, Hazekamp M, Van Den Boogaard P, Lamb H, Kroft L, Jongbloed M, Westenberg J, Wentzel J</div>
+          <div class="publication-venue">Interdisciplinary Cardiovascular and Thoracic Surgery, 2023</div>
+        </div>
+
+        <div class="publication">
+          <div class="publication-title"><a href="https://doi.org/10.3390/cancers14235965" target="_blank">Homologous recombination deficiency and cyclin E1 amplification are correlated with immune cell infiltration and survival in high-grade serous ovarian cancer</a></div>
+          <div class="publication-authors">Van Wagensveld L, Van Baal JOAM, Timmermans M, <span class="me">Gaillard D</span>, Borghuis L, Coffelt SB, Rosenberg EH, Lok CAR, Nijman HW, Kooreman LFS</div>
+          <div class="publication-venue">Cancers, 2022</div>
         </div>
       </section>
 
