@@ -7,7 +7,7 @@
     <meta name="description" content="Building affordable deep learning systems for liquid biopsy cancer detection. PhD researcher at Netherlands Cancer Institute specializing in cell-free DNA analysis." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;700&display=swap" rel="stylesheet">
     <style>
       * {
         margin: 0;
@@ -21,6 +21,11 @@
         --charcoal: #2d2d2d;
         --sage: #4a5d52;
         --border: #e0dcd6;
+        --green-light: #243f34;
+      }
+
+      html {
+        scroll-behavior: smooth;
       }
 
       body {
@@ -29,126 +34,197 @@
         color: var(--charcoal);
         line-height: 1.7;
         font-size: 18px;
+        overflow-x: hidden;
       }
 
-      .container {
-        max-width: 900px;
-        margin: 0 auto;
-        min-height: 100dvh;
-        display: flex;
-        flex-direction: column;
-        padding: clamp(32px, 5vh, 80px) 24px;
-        gap: clamp(32px, 5vh, 64px);
-      }
-
-      header {
-        display: block;
-      }
-
-      .logo {
-        font-family: "Cormorant", Georgia, serif;
-        font-size: 3.25rem;
-        font-weight: 700;
-        color: var(--green);
-        text-decoration: none;
-        letter-spacing: 0.02em;
-        line-height: 1.2;
-      }
-
-      /* Hero Section */
+      /* ── Hero Section ── */
       .hero {
-        padding: clamp(24px, 4vh, 48px) 0;
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        min-height: 500px;
+        overflow: hidden;
         display: flex;
         align-items: center;
-        gap: 32px;
+        justify-content: center;
       }
 
-      .headshot {
-        width: 180px;
-        height: 180px;
-        border-radius: 50%;
+      .hero-image {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
         object-fit: cover;
-        border: 3px solid var(--border);
-        flex-shrink: 0;
+        object-position: center 20%;
       }
 
-      .hero-text {
-        flex: 1;
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to bottom,
+          rgba(26, 58, 47, 0.55) 0%,
+          rgba(26, 58, 47, 0.7) 50%,
+          rgba(26, 58, 47, 0.85) 100%
+        );
       }
 
-      .hero h1 {
-        font-size: clamp(1.6rem, 4vw, 2.2rem);
-        font-weight: 500;
-        color: var(--green);
-        margin-bottom: 20px;
-        letter-spacing: -0.01em;
-        line-height: 1.3;
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        padding: 0 24px;
+        max-width: 800px;
       }
 
-      .hero p {
-        color: var(--sage);
+      .hero-logo {
+        font-family: "Cormorant", Georgia, serif;
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: 0.03em;
+        line-height: 1.1;
+        margin-bottom: 24px;
+      }
+
+      .hero-headline {
+        font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+        color: rgba(255, 255, 255, 0.88);
+        font-weight: 400;
+        line-height: 1.6;
         max-width: 600px;
-        font-size: 1.1rem;
+        margin: 0 auto;
       }
 
-      /* Vision Section */
-      .vision {
-        padding: clamp(24px, 4vh, 48px) 0;
+      .hero-scroll-hint {
+        position: absolute;
+        bottom: 32px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.75rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        animation: float 2.5s ease-in-out infinite;
+      }
+
+      .hero-scroll-hint svg {
+        width: 20px;
+        height: 20px;
+        stroke: rgba(255, 255, 255, 0.5);
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateX(-50%) translateY(0); }
+        50% { transform: translateX(-50%) translateY(6px); }
+      }
+
+      /* ── Content Sections ── */
+      .section {
+        display: grid;
+        grid-template-columns: 7fr 3fr;
+        min-height: 100vh;
         border-top: 1px solid var(--border);
       }
 
-      .vision h2 {
-        font-size: 0.85rem;
+      .section.reversed {
+        grid-template-columns: 3fr 7fr;
+      }
+
+      .section-text {
+        padding: clamp(48px, 8vh, 96px) clamp(32px, 5vw, 80px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .section-visual {
+        position: relative;
+        background: var(--green);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .section-visual svg {
+        width: 80%;
+        height: auto;
+        max-height: 70%;
+        opacity: 0.6;
+      }
+
+      /* Section labels */
+      .section-label {
+        font-size: 0.8rem;
         font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 0.1em;
+        letter-spacing: 0.12em;
         color: var(--sage);
-        margin-bottom: clamp(16px, 3vh, 32px);
+        margin-bottom: 24px;
       }
 
-      .vision-content {
-        max-width: 640px;
+      .section-text h2 {
+        font-family: "Cormorant", Georgia, serif;
+        font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+        font-weight: 700;
+        color: var(--green);
+        line-height: 1.25;
+        margin-bottom: 24px;
       }
 
-      .vision-content p {
-        margin-bottom: 1.2em;
+      .section-text p {
         color: var(--charcoal);
+        margin-bottom: 1.2em;
+        max-width: 580px;
       }
 
-      .vision-content p:last-child {
+      .section-text p:last-child {
         margin-bottom: 0;
       }
 
-      .vision-content .highlight {
+      .highlight {
         color: var(--green);
         font-weight: 500;
       }
 
-      .vision-content .stage {
+      .stage {
         color: var(--sage);
         font-style: italic;
-        margin-top: 1.5em;
-        padding-top: 1.5em;
+        margin-top: 1em;
+        padding-top: 1em;
         border-top: 1px solid var(--border);
       }
 
-      /* Publications Section */
-      .publications {
-        padding: clamp(24px, 4vh, 48px) 0;
-        border-top: 1px solid var(--border);
+      /* Services list */
+      .services-list {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        margin-top: 8px;
       }
 
-      .publications h2 {
-        font-size: 0.85rem;
+      .service-item h3 {
+        font-size: 1.05rem;
         font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: var(--sage);
-        margin-bottom: clamp(16px, 3vh, 32px);
+        color: var(--green);
+        margin-bottom: 4px;
       }
 
+      .service-item p {
+        color: var(--sage);
+        font-size: 0.95rem;
+        margin-bottom: 0;
+      }
+
+      /* Publications */
       .publication {
-        margin-bottom: 24px;
+        margin-bottom: 28px;
       }
 
       .publication:last-child {
@@ -190,61 +266,16 @@
         font-style: italic;
       }
 
-      /* Services Section */
-      .services {
-        padding: clamp(24px, 4vh, 48px) 0;
+      /* ── Footer ── */
+      .site-footer {
+        padding: clamp(48px, 6vh, 80px) clamp(32px, 5vw, 80px);
         border-top: 1px solid var(--border);
-      }
-
-      .services h2 {
-        font-size: 0.85rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: var(--sage);
-        margin-bottom: 8px;
-      }
-
-      .services > p {
-        color: var(--sage);
-        margin-bottom: clamp(16px, 3vh, 32px);
-      }
-
-      .service {
-        padding: clamp(12px, 1.5vh, 20px) 0;
-        border-top: 1px solid var(--border);
-      }
-
-      .service:last-child {
-        border-bottom: 1px solid var(--border);
-      }
-
-      .service h3 {
-        font-size: 1rem;
-        font-weight: 600;
-        color: var(--green);
-        margin-bottom: 6px;
-      }
-
-      .service p {
-        color: var(--sage);
-        font-size: 0.95rem;
-      }
-
-      .services-grid {
-        display: flex;
-        flex-direction: column;
-      }
-
-      /* Footer/Contact */
-      footer {
-        margin-top: auto;
-        padding-top: clamp(24px, 4vh, 48px);
-        border-top: 1px solid var(--border);
+        text-align: center;
       }
 
       .contact {
         color: var(--sage);
+        font-size: 1.05rem;
       }
 
       .contact a {
@@ -265,105 +296,233 @@
         color: var(--sage);
       }
 
-      /* Wide screens: services in 3 columns */
-      @media (min-width: 900px) {
-        .services-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 24px;
+      .footer-logo {
+        font-family: "Cormorant", Georgia, serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--green);
+        margin-bottom: 16px;
+      }
+
+      /* ── Scroll Animations ── */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .fade-in-left {
+        opacity: 0;
+        transform: translateX(-30px);
+        transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+      }
+
+      .fade-in-left.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .fade-in-right {
+        opacity: 0;
+        transform: translateX(30px);
+        transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+      }
+
+      .fade-in-right.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      /* ── Responsive ── */
+      @media (max-width: 900px) {
+        .section {
+          grid-template-columns: 1fr;
+          min-height: auto;
         }
 
-        .service {
-          border-top: none;
-          border-bottom: none;
-          padding: 0;
+        .section.reversed {
+          grid-template-columns: 1fr;
         }
 
-        .service:last-child {
-          border-bottom: none;
+        .section-visual {
+          min-height: 280px;
+          order: -1;
+        }
+
+        .section.reversed .section-visual {
+          order: -1;
+        }
+
+        .section-text {
+          padding: clamp(32px, 5vh, 64px) 24px;
         }
       }
 
-      /* Mobile adjustments */
       @media (max-width: 600px) {
         body {
           font-size: 16px;
         }
 
-        .container {
-          padding: clamp(24px, 4vh, 48px) 20px;
+        .hero-logo {
+          font-size: 2.2rem;
         }
 
-        .logo {
-          font-size: 2rem;
+        .hero-headline {
+          font-size: 1rem;
         }
 
-        .hero {
-          flex-direction: column;
-          text-align: center;
-        }
-
-        .headshot {
-          width: 140px;
-          height: 140px;
-        }
-
-        .hero h1 {
-          font-size: 1.5rem;
+        .section-visual {
+          min-height: 200px;
         }
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <header>
-        <span class="logo">Gaillard Systems</span>
-      </header>
 
-      <section class="hero">
-        <img src="duco.jpg" alt="Duco Gaillard" class="headshot" />
-        <div class="hero-text">
-          <h1>Building AI that detects cancer before symptoms appear.</h1>
-          <p>PhD researcher at Netherlands Cancer Institute. Developing affordable deep learning systems for liquid biopsy cancer detection.</p>
-        </div>
-      </section>
+    <!-- ── Hero ── -->
+    <section class="hero">
+      <img src="duco.jpg" alt="Duco Gaillard" class="hero-image" />
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="hero-logo">Gaillard Systems</div>
+        <p class="hero-headline">Building AI that detects cancer before symptoms appear.</p>
+      </div>
+      <div class="hero-scroll-hint">
+        <span>Scroll</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </div>
+    </section>
 
-      <section class="vision">
-        <h2>What I'm Building</h2>
-        <div class="vision-content">
-          <p><span class="highlight">Cancer detected early is often curable. Detected late, it's fatal.</span></p>
-          <p>My PhD research at the Netherlands Cancer Institute focused on finding cancer signals in cell-free DNA using deep learning. The patterns are there in the blood, invisible to traditional methods, but detectable with the right models at a fraction of the cost.</p>
-          <p>I'm building a system to make this accessible: liquid biopsy analysis that could integrate into routine blood work, catching cancers at stage 1 when survival rates are dramatically higher.</p>
-          <p class="stage">Currently developing the prototype. Consulting on AI systems to fund the R&D.</p>
-        </div>
-      </section>
+    <!-- ── Section 1: Vision (text left, visual right) ── -->
+    <section class="section">
+      <div class="section-text fade-in-left">
+        <div class="section-label">What I'm Building</div>
+        <h2>Early detection saves lives.</h2>
+        <p><span class="highlight">Cancer detected early is often curable. Detected late, it's fatal.</span></p>
+        <p>My PhD research at the Netherlands Cancer Institute focused on finding cancer signals in cell-free DNA using deep learning. The patterns are there in the blood, invisible to traditional methods, but detectable with the right models at a fraction of the cost.</p>
+        <p>I'm building a system to make this accessible: liquid biopsy analysis that could integrate into routine blood work, catching cancers at stage 1 when survival rates are dramatically higher.</p>
+        <p class="stage">Currently developing the prototype. Consulting on AI systems to fund the R&D.</p>
+      </div>
+      <div class="section-visual fade-in-right">
+        <!-- DNA / molecular visualization -->
+        <svg viewBox="0 0 200 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g opacity="0.9">
+            <!-- DNA double helix -->
+            <path d="M60 20 Q100 60 140 80 Q100 100 60 120 Q100 140 140 160 Q100 180 60 200 Q100 220 140 240 Q100 260 60 280 Q100 300 140 320 Q100 340 60 360 Q100 380 140 400" stroke="rgba(248,246,243,0.35)" stroke-width="2" fill="none"/>
+            <path d="M140 20 Q100 60 60 80 Q100 100 140 120 Q100 140 60 160 Q100 180 140 200 Q100 220 60 240 Q100 260 140 280 Q100 300 60 320 Q100 340 140 360 Q100 380 60 400" stroke="rgba(248,246,243,0.35)" stroke-width="2" fill="none"/>
+            <!-- Rungs -->
+            <line x1="72" y1="50" x2="128" y2="50" stroke="rgba(248,246,243,0.2)" stroke-width="1.5"/>
+            <line x1="62" y1="80" x2="138" y2="80" stroke="rgba(248,246,243,0.2)" stroke-width="1.5"/>
+            <line x1="72" y1="110" x2="128" y2="110" stroke="rgba(248,246,243,0.2)" stroke-width="1.5"/>
+            <line x1="62" y1="140" x2="138" y2="140" stroke="rgba(248,246,243,0.2)" stroke-width="1.5"/>
+            <line x1="72" y1="170" x2="128" y2="170" stroke="rgba(248,246,243,0.2)" stroke-width="1.5"/>
+            <line x1="62" y1="200" x2="138" y2="200" stroke="rgba(248,246,243,0.2)" stroke-width="1.5"/>
+            <line x1="72" y1="230" x2="128" y2="230" stroke="rgba(248,246,243,0.2)" stroke-width="1.5"/>
+            <line x1="62" y1="260" x2="138" y2="260" stroke="rgba(248,246,243,0.2)" stroke-width="1.5"/>
+            <line x1="72" y1="290" x2="128" y2="290" stroke="rgba(248,246,243,0.2)" stroke-width="1.5"/>
+            <line x1="62" y1="320" x2="138" y2="320" stroke="rgba(248,246,243,0.2)" stroke-width="1.5"/>
+            <line x1="72" y1="350" x2="128" y2="350" stroke="rgba(248,246,243,0.2)" stroke-width="1.5"/>
+            <line x1="62" y1="380" x2="138" y2="380" stroke="rgba(248,246,243,0.2)" stroke-width="1.5"/>
+            <!-- Nodes -->
+            <circle cx="60" cy="20" r="4" fill="rgba(248,246,243,0.5)"/>
+            <circle cx="140" cy="80" r="4" fill="rgba(248,246,243,0.5)"/>
+            <circle cx="60" cy="120" r="4" fill="rgba(248,246,243,0.5)"/>
+            <circle cx="140" cy="160" r="4" fill="rgba(248,246,243,0.5)"/>
+            <circle cx="60" cy="200" r="4" fill="rgba(248,246,243,0.5)"/>
+            <circle cx="140" cy="240" r="4" fill="rgba(248,246,243,0.5)"/>
+            <circle cx="60" cy="280" r="4" fill="rgba(248,246,243,0.5)"/>
+            <circle cx="140" cy="320" r="4" fill="rgba(248,246,243,0.5)"/>
+            <circle cx="60" cy="360" r="4" fill="rgba(248,246,243,0.5)"/>
+            <circle cx="140" cy="20" r="4" fill="rgba(248,246,243,0.5)"/>
+            <circle cx="60" cy="80" r="4" fill="rgba(248,246,243,0.5)"/>
+            <circle cx="140" cy="120" r="4" fill="rgba(248,246,243,0.5)"/>
+            <circle cx="60" cy="160" r="4" fill="rgba(248,246,243,0.5)"/>
+            <circle cx="140" cy="200" r="4" fill="rgba(248,246,243,0.5)"/>
+            <circle cx="60" cy="240" r="4" fill="rgba(248,246,243,0.5)"/>
+            <circle cx="140" cy="280" r="4" fill="rgba(248,246,243,0.5)"/>
+            <circle cx="60" cy="320" r="4" fill="rgba(248,246,243,0.5)"/>
+            <circle cx="140" cy="360" r="4" fill="rgba(248,246,243,0.5)"/>
+            <circle cx="60" cy="400" r="4" fill="rgba(248,246,243,0.5)"/>
+            <circle cx="140" cy="400" r="4" fill="rgba(248,246,243,0.5)"/>
+          </g>
+        </svg>
+      </div>
+    </section>
 
-      <section class="services">
-        <h2>Current Work</h2>
+    <!-- ── Section 2: Services (visual left, text right) ── -->
+    <section class="section reversed">
+      <div class="section-visual fade-in-left">
+        <!-- Network / nodes visualization -->
+        <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g opacity="0.9">
+            <!-- Connection lines -->
+            <line x1="150" y1="60" x2="80" y2="140" stroke="rgba(248,246,243,0.2)" stroke-width="1.5"/>
+            <line x1="150" y1="60" x2="220" y2="130" stroke="rgba(248,246,243,0.2)" stroke-width="1.5"/>
+            <line x1="150" y1="60" x2="150" y2="150" stroke="rgba(248,246,243,0.2)" stroke-width="1.5"/>
+            <line x1="80" y1="140" x2="60" y2="220" stroke="rgba(248,246,243,0.2)" stroke-width="1.5"/>
+            <line x1="80" y1="140" x2="150" y2="150" stroke="rgba(248,246,243,0.2)" stroke-width="1.5"/>
+            <line x1="220" y1="130" x2="240" y2="210" stroke="rgba(248,246,243,0.2)" stroke-width="1.5"/>
+            <line x1="220" y1="130" x2="150" y2="150" stroke="rgba(248,246,243,0.2)" stroke-width="1.5"/>
+            <line x1="150" y1="150" x2="100" y2="240" stroke="rgba(248,246,243,0.2)" stroke-width="1.5"/>
+            <line x1="150" y1="150" x2="200" y2="240" stroke="rgba(248,246,243,0.2)" stroke-width="1.5"/>
+            <line x1="60" y1="220" x2="100" y2="240" stroke="rgba(248,246,243,0.2)" stroke-width="1.5"/>
+            <line x1="240" y1="210" x2="200" y2="240" stroke="rgba(248,246,243,0.2)" stroke-width="1.5"/>
+            <!-- Outer ring connections -->
+            <line x1="60" y1="220" x2="150" y2="150" stroke="rgba(248,246,243,0.1)" stroke-width="1"/>
+            <line x1="240" y1="210" x2="150" y2="150" stroke="rgba(248,246,243,0.1)" stroke-width="1"/>
+            <line x1="100" y1="240" x2="200" y2="240" stroke="rgba(248,246,243,0.15)" stroke-width="1"/>
+            <!-- Nodes -->
+            <circle cx="150" cy="60" r="8" fill="rgba(248,246,243,0.45)"/>
+            <circle cx="80" cy="140" r="6" fill="rgba(248,246,243,0.35)"/>
+            <circle cx="220" cy="130" r="6" fill="rgba(248,246,243,0.35)"/>
+            <circle cx="150" cy="150" r="10" fill="rgba(248,246,243,0.5)"/>
+            <circle cx="60" cy="220" r="5" fill="rgba(248,246,243,0.3)"/>
+            <circle cx="240" cy="210" r="5" fill="rgba(248,246,243,0.3)"/>
+            <circle cx="100" cy="240" r="6" fill="rgba(248,246,243,0.35)"/>
+            <circle cx="200" cy="240" r="6" fill="rgba(248,246,243,0.35)"/>
+            <!-- Pulse rings -->
+            <circle cx="150" cy="150" r="20" stroke="rgba(248,246,243,0.12)" stroke-width="1" fill="none"/>
+            <circle cx="150" cy="150" r="40" stroke="rgba(248,246,243,0.08)" stroke-width="1" fill="none"/>
+            <circle cx="150" cy="150" r="70" stroke="rgba(248,246,243,0.05)" stroke-width="1" fill="none"/>
+          </g>
+        </svg>
+      </div>
+      <div class="section-text fade-in-right">
+        <div class="section-label">Current Work</div>
+        <h2>AI systems that deliver.</h2>
         <p>Building toward liquid biopsy cancer detection while consulting on:</p>
-        <div class="services-grid">
-          <div class="service">
+        <div class="services-list">
+          <div class="service-item">
             <h3>Data Science</h3>
             <p>ML pipelines and complex analysis for research and industry. From messy data to actionable insights.</p>
           </div>
-
-          <div class="service">
+          <div class="service-item">
             <h3>AI Agents</h3>
             <p>Autonomous systems that reason, search, and act. RAG, tool use, and multi-agent architectures.</p>
           </div>
-
-          <div class="service">
+          <div class="service-item">
             <h3>Hardware Consulting</h3>
             <p>Local AI deployment and infrastructure. Helping you choose between cloud and on-premise.</p>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="publications">
-        <h2>Publications</h2>
+    <!-- ── Section 3: Publications (text left, visual right) ── -->
+    <section class="section">
+      <div class="section-text fade-in-left">
+        <div class="section-label">Publications</div>
+        <h2>Peer-reviewed research.</h2>
 
         <div class="publication">
-          <div class="publication-title"><a href="https://doi.org/10.1136/ijgc-2023-005100" target="_blank">Evaluating the effectiveness of pre-operative diagnosis of ovarian cancer using minimally invasive liquid biopsies by combining serum human epididymis protein 4 and cell-free DNA in patients with an ovarian mass</a></div>
+          <div class="publication-title"><a href="https://doi.org/10.1136/ijgc-2023-005100" target="_blank">Evaluating the effectiveness of pre-operative diagnosis of ovarian cancer using minimally invasive liquid biopsies</a></div>
           <div class="publication-authors"><span class="me">Gaillard DHK</span>, Lof P, Sistermans EA, Mokveld T, Horlings HM, Mom CH, Reinders MJT, Amant F, Van Den Broek D, Wessels LFA</div>
           <div class="publication-venue">International Journal of Gynecological Cancer, 2024</div>
         </div>
@@ -379,25 +538,78 @@
           <div class="publication-authors">Van Wagensveld L, Van Baal JOAM, Timmermans M, <span class="me">Gaillard D</span>, Borghuis L, Coffelt SB, Rosenberg EH, Lok CAR, Nijman HW, Kooreman LFS</div>
           <div class="publication-venue">Cancers, 2022</div>
         </div>
-      </section>
+      </div>
+      <div class="section-visual fade-in-right">
+        <!-- Abstract data / chart visualization -->
+        <svg viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g opacity="0.9">
+            <!-- Bar chart abstraction -->
+            <rect x="25" y="180" width="20" height="80" rx="2" fill="rgba(248,246,243,0.2)"/>
+            <rect x="55" y="140" width="20" height="120" rx="2" fill="rgba(248,246,243,0.25)"/>
+            <rect x="85" y="100" width="20" height="160" rx="2" fill="rgba(248,246,243,0.3)"/>
+            <rect x="115" y="120" width="20" height="140" rx="2" fill="rgba(248,246,243,0.25)"/>
+            <rect x="145" y="80" width="20" height="180" rx="2" fill="rgba(248,246,243,0.35)"/>
+            <!-- Trend line -->
+            <polyline points="35,175 65,135 95,95 125,115 155,75" stroke="rgba(248,246,243,0.5)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Dots on trend -->
+            <circle cx="35" cy="175" r="3.5" fill="rgba(248,246,243,0.5)"/>
+            <circle cx="65" cy="135" r="3.5" fill="rgba(248,246,243,0.5)"/>
+            <circle cx="95" cy="95" r="3.5" fill="rgba(248,246,243,0.5)"/>
+            <circle cx="125" cy="115" r="3.5" fill="rgba(248,246,243,0.5)"/>
+            <circle cx="155" cy="75" r="3.5" fill="rgba(248,246,243,0.5)"/>
+            <!-- Grid lines -->
+            <line x1="20" y1="260" x2="175" y2="260" stroke="rgba(248,246,243,0.15)" stroke-width="1"/>
+            <line x1="20" y1="220" x2="175" y2="220" stroke="rgba(248,246,243,0.08)" stroke-width="1" stroke-dasharray="4 4"/>
+            <line x1="20" y1="180" x2="175" y2="180" stroke="rgba(248,246,243,0.08)" stroke-width="1" stroke-dasharray="4 4"/>
+            <line x1="20" y1="140" x2="175" y2="140" stroke="rgba(248,246,243,0.08)" stroke-width="1" stroke-dasharray="4 4"/>
+            <line x1="20" y1="100" x2="175" y2="100" stroke="rgba(248,246,243,0.08)" stroke-width="1" stroke-dasharray="4 4"/>
+            <!-- Scatter dots -->
+            <circle cx="40" cy="200" r="2" fill="rgba(248,246,243,0.2)"/>
+            <circle cx="70" cy="170" r="2" fill="rgba(248,246,243,0.2)"/>
+            <circle cx="100" cy="155" r="2" fill="rgba(248,246,243,0.2)"/>
+            <circle cx="130" cy="145" r="2" fill="rgba(248,246,243,0.2)"/>
+            <circle cx="160" cy="125" r="2" fill="rgba(248,246,243,0.2)"/>
+            <circle cx="50" cy="210" r="1.5" fill="rgba(248,246,243,0.15)"/>
+            <circle cx="80" cy="165" r="1.5" fill="rgba(248,246,243,0.15)"/>
+            <circle cx="110" cy="150" r="1.5" fill="rgba(248,246,243,0.15)"/>
+            <circle cx="140" cy="135" r="1.5" fill="rgba(248,246,243,0.15)"/>
+          </g>
+        </svg>
+      </div>
+    </section>
 
-      <footer>
-        <p class="contact"><span id="email"></span></p>
-        <p class="contact-note">Open to conversations about AI, cancer detection, and building the future of diagnostics.</p>
-      </footer>
-    </div>
+    <!-- ── Footer ── -->
+    <footer class="site-footer">
+      <div class="footer-logo">Gaillard Systems</div>
+      <p class="contact"><span id="email"></span></p>
+      <p class="contact-note">Open to conversations about AI, cancer detection, and building the future of diagnostics.</p>
+    </footer>
 
     <script>
-      // Basic anti-scrape: build the address at runtime
+      // Anti-scrape email assembly
       const user = "duco";
       const domain = "gaillard.systems";
       const addr = `${user}@${domain}`;
-
       const a = document.createElement("a");
       a.href = `mailto:${addr}`;
       a.textContent = addr;
-
       document.getElementById("email").appendChild(a);
+
+      // Scroll-triggered animations
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+
+      document.querySelectorAll(".fade-in, .fade-in-left, .fade-in-right").forEach((el) => {
+        observer.observe(el);
+      });
     </script>
   </body>
 </html>
