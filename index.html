@@ -181,7 +181,6 @@
       .section-text p {
         color: var(--charcoal);
         margin-bottom: 1.2em;
-        max-width: 580px;
       }
 
       .section-text p:last-child {
@@ -338,34 +337,27 @@
         transform: translateX(0);
       }
 
-      /* ── Responsive ── */
+      /* ── Responsive: tablet ── */
       @media (max-width: 900px) {
-        .section {
-          grid-template-columns: 1fr;
-          min-height: auto;
-        }
-
-        .section.reversed {
-          grid-template-columns: 1fr;
-        }
-
-        .section-visual {
-          min-height: 280px;
-          order: -1;
-        }
-
-        .section.reversed .section-visual {
-          order: -1;
-        }
-
         .section-text {
           padding: clamp(32px, 5vh, 64px) 24px;
         }
+
+        .section-text h2 {
+          font-size: 1.5rem;
+          margin-bottom: 16px;
+        }
+
+        .section-label {
+          margin-bottom: 16px;
+        }
       }
 
+      /* ── Responsive: phone ── */
       @media (max-width: 600px) {
         body {
-          font-size: 16px;
+          font-size: 14px;
+          line-height: 1.6;
         }
 
         .hero-logo {
@@ -376,8 +368,61 @@
           font-size: 1rem;
         }
 
-        .section-visual {
-          min-height: 200px;
+        .section {
+          min-height: auto;
+        }
+
+        .section-text {
+          padding: 24px 16px;
+        }
+
+        .section-text h2 {
+          font-size: 1.25rem;
+          margin-bottom: 12px;
+        }
+
+        .section-label {
+          font-size: 0.7rem;
+          margin-bottom: 12px;
+        }
+
+        .section-text p {
+          font-size: 0.85rem;
+          margin-bottom: 0.8em;
+        }
+
+        .services-list {
+          gap: 16px;
+        }
+
+        .service-item h3 {
+          font-size: 0.9rem;
+        }
+
+        .service-item p {
+          font-size: 0.8rem;
+        }
+
+        .publication {
+          margin-bottom: 16px;
+        }
+
+        .publication-title {
+          font-size: 0.85rem;
+          line-height: 1.3;
+        }
+
+        .publication-authors,
+        .publication-venue {
+          font-size: 0.75rem;
+        }
+
+        .section-visual svg {
+          width: 70%;
+        }
+
+        .stage {
+          font-size: 0.8rem;
         }
       }
     </style>
