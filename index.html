@@ -116,8 +116,9 @@
         min-height: 500px;
         overflow: hidden;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
+        padding-top: clamp(100px, 15vh, 180px);
       }
 
       .hero-image {
@@ -134,9 +135,10 @@
         inset: 0;
         background: linear-gradient(
           to bottom,
-          rgba(29, 29, 31, 0.45) 0%,
-          rgba(29, 29, 31, 0.6) 50%,
-          rgba(29, 29, 31, 0.8) 100%
+          rgba(29, 29, 31, 0.65) 0%,
+          rgba(29, 29, 31, 0.35) 35%,
+          rgba(29, 29, 31, 0.3) 60%,
+          rgba(29, 29, 31, 0.7) 100%
         );
       }
 
@@ -155,16 +157,18 @@
         line-height: 1.08;
         color: #fff;
         margin-bottom: 20px;
+        text-shadow: 0 2px 20px rgba(0,0,0,0.3);
       }
 
       .hero-subtitle {
         font-size: clamp(17px, 2.5vw, 22px);
         font-weight: 300;
-        color: rgba(255, 255, 255, 0.75);
+        color: rgba(255, 255, 255, 0.85);
         line-height: 1.5;
         max-width: 560px;
         margin: 0 auto;
         letter-spacing: -0.01em;
+        text-shadow: 0 1px 10px rgba(0,0,0,0.3);
       }
 
       .hero-scroll {
@@ -198,33 +202,54 @@
       /* ── SVG Visualization Animations ── */
       @keyframes driftUp {
         0% { transform: translateY(0); opacity: 0; }
-        15% { opacity: 1; }
+        10% { opacity: 1; }
         85% { opacity: 1; }
-        100% { transform: translateY(-380px); opacity: 0; }
+        100% { transform: translateY(-600px); opacity: 0; }
+      }
+
+      @keyframes driftRight {
+        0% { transform: translateX(-100px); opacity: 0; }
+        10% { opacity: 1; }
+        85% { opacity: 1; }
+        100% { transform: translateX(800px); opacity: 0; }
       }
 
       @keyframes pulse {
         0%, 100% { opacity: 0.15; }
-        50% { opacity: 0.5; }
+        50% { opacity: 0.6; }
       }
 
       @keyframes signalPulse {
         0%, 100% { r: 3; opacity: 0.6; }
-        50% { r: 6; opacity: 0.2; }
+        50% { r: 8; opacity: 0.15; }
+      }
+
+      @keyframes signalPulseLarge {
+        0%, 100% { r: 4; opacity: 0.5; }
+        50% { r: 14; opacity: 0.05; }
       }
 
       @keyframes dashFlow {
         to { stroke-dashoffset: -20; }
       }
 
+      @keyframes dashFlowFast {
+        to { stroke-dashoffset: -40; }
+      }
+
       @keyframes nodeGlow {
-        0%, 100% { opacity: 0.25; }
-        50% { opacity: 0.6; }
+        0%, 100% { opacity: 0.2; }
+        50% { opacity: 0.8; }
+      }
+
+      @keyframes nodePop {
+        0%, 100% { transform: scale(1); opacity: 0.3; }
+        50% { transform: scale(1.6); opacity: 0.8; }
       }
 
       @keyframes orbitSpin {
-        from { transform-origin: 150px 150px; transform: rotate(0deg); }
-        to { transform-origin: 150px 150px; transform: rotate(360deg); }
+        from { transform-origin: center; transform: rotate(0deg); }
+        to { transform-origin: center; transform: rotate(360deg); }
       }
 
       @keyframes helixRotate {
@@ -233,188 +258,197 @@
       }
 
       @keyframes fadeInOut {
-        0%, 100% { opacity: 0.05; }
-        50% { opacity: 0.3; }
+        0%, 100% { opacity: 0.03; }
+        50% { opacity: 0.4; }
       }
 
-      .section-visual svg {
-        overflow: visible;
+      @keyframes scanLine {
+        0% { transform: translateY(0); opacity: 0; }
+        20% { opacity: 1; }
+        80% { opacity: 1; }
+        100% { transform: translateY(-400px); opacity: 0; }
       }
 
-      /* ── Content Sections ── */
-      .section {
-        padding: 100px 22px;
-        border-top: 1px solid var(--border);
+      @keyframes waveMove {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-200px); }
       }
 
-      .section-alt {
-        background: var(--bg-alt);
+      @keyframes particleFloat {
+        0% { transform: translate(0, 0); opacity: 0; }
+        15% { opacity: 0.6; }
+        85% { opacity: 0.6; }
+        100% { transform: translate(var(--tx, 50px), var(--ty, -80px)); opacity: 0; }
       }
 
-      .section-inner {
-        max-width: 720px;
-        margin: 0 auto;
+      @keyframes dataStream {
+        0% { stroke-dashoffset: 100; opacity: 0; }
+        15% { opacity: 0.8; }
+        85% { opacity: 0.8; }
+        100% { stroke-dashoffset: -100; opacity: 0; }
       }
 
-      .section-label {
-        font-size: 13px;
-        font-weight: 500;
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
-        color: var(--gray-light);
-        margin-bottom: 12px;
+      @keyframes ripple {
+        0% { r: 2; opacity: 0.6; stroke-width: 2; }
+        100% { r: 40; opacity: 0; stroke-width: 0.5; }
       }
 
-      .section-heading {
-        font-size: clamp(28px, 4vw, 40px);
-        font-weight: 600;
-        letter-spacing: -0.025em;
-        line-height: 1.12;
-        color: var(--black);
-        margin-bottom: 32px;
+      @keyframes cellDrift {
+        0% { transform: translate(0, 0) rotate(0deg); }
+        25% { transform: translate(10px, -5px) rotate(3deg); }
+        50% { transform: translate(-5px, -10px) rotate(-2deg); }
+        75% { transform: translate(-10px, 5px) rotate(1deg); }
+        100% { transform: translate(0, 0) rotate(0deg); }
       }
 
-      .section p {
-        color: var(--gray-dark);
-        font-size: 17px;
-        line-height: 1.65;
-        margin-bottom: 1em;
+      @keyframes signalTravel {
+        0% { offset-distance: 0%; opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { offset-distance: 100%; opacity: 0; }
       }
 
-      .section p:last-child {
-        margin-bottom: 0;
-      }
-
-      .section .note {
-        color: var(--gray-light);
-        font-size: 15px;
-        margin-top: 24px;
-        padding-top: 24px;
-        border-top: 1px solid var(--border);
-      }
-
-      /* ── Visual Sections (text + SVG side-by-side) ── */
-      .section-split {
-        padding: 0;
-        display: grid;
-        grid-template-columns: 7fr 3fr;
-        min-height: 520px;
-      }
-
-      .section-split.reversed {
-        grid-template-columns: 3fr 7fr;
-      }
-
-      .section-split .section-text {
-        padding: clamp(48px, 6vh, 80px) clamp(32px, 5vw, 64px);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-
-      .section-split .section-text .section-label {
-        font-size: 13px;
-        font-weight: 500;
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
-        color: var(--gray-light);
-        margin-bottom: 12px;
-      }
-
-      .section-split .section-text h2 {
-        font-size: clamp(28px, 4vw, 40px);
-        font-weight: 600;
-        letter-spacing: -0.025em;
-        line-height: 1.12;
-        color: var(--black);
-        margin-bottom: 24px;
-      }
-
-      .section-split .section-text p {
-        color: var(--gray-dark);
-        font-size: 17px;
-        line-height: 1.65;
-        margin-bottom: 1em;
-        max-width: 560px;
-      }
-
-      .section-split .section-text p:last-child {
-        margin-bottom: 0;
-      }
-
-      .section-split .section-text .note {
-        color: var(--gray-light);
-        font-size: 15px;
-        margin-top: 20px;
-        padding-top: 20px;
-        border-top: 1px solid var(--border);
-      }
-
-      .section-visual {
+      /* ── Animated Section (full-width with overlay text) ── */
+      .section-animated {
         position: relative;
-        background: var(--black);
+        width: 100%;
+        min-height: 600px;
+        overflow: hidden;
         display: flex;
         align-items: center;
         justify-content: center;
-        overflow: hidden;
       }
 
-      .section-visual svg {
-        width: 75%;
-        height: auto;
-        max-height: 65%;
-        opacity: 0.7;
+      .section-animated-bg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
       }
 
-      /* ── Services Grid ── */
+      .section-animated-bg svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .section-animated-bg.dark {
+        background: var(--black);
+      }
+
+      .section-animated-bg.dark-alt {
+        background: #111113;
+      }
+
+      .section-animated-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+      }
+
+      .section-animated-content {
+        position: relative;
+        z-index: 2;
+        max-width: 720px;
+        margin: 0 auto;
+        padding: clamp(60px, 10vh, 100px) clamp(24px, 5vw, 64px);
+      }
+
+      .section-animated-content .section-label {
+        font-size: 13px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: rgba(255, 255, 255, 0.4);
+        margin-bottom: 16px;
+      }
+
+      .section-animated-content h2 {
+        font-size: clamp(32px, 5vw, 48px);
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+        color: #fff;
+        margin-bottom: 28px;
+        text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+      }
+
+      .section-animated-content p {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 17px;
+        line-height: 1.7;
+        margin-bottom: 1em;
+        max-width: 560px;
+        text-shadow: 0 1px 8px rgba(0,0,0,0.4);
+      }
+
+      .section-animated-content p:last-child {
+        margin-bottom: 0;
+      }
+
+      .section-animated-content .note {
+        color: rgba(255, 255, 255, 0.4);
+        font-size: 15px;
+        margin-top: 24px;
+        padding-top: 24px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      /* ── Services Grid (on dark bg) ── */
       .services-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 32px;
-        margin-top: 48px;
+        gap: 24px;
+        margin-top: 40px;
       }
 
       .service-card {
-        padding: 32px 28px;
-        background: var(--white);
+        padding: 28px 24px;
+        background: rgba(255, 255, 255, 0.06);
         border-radius: 16px;
-        border: 1px solid var(--border);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        transition: background 0.3s, border-color 0.3s;
       }
 
-      .section-alt .service-card {
-        background: var(--white);
+      .service-card:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.15);
       }
 
       .service-card h3 {
         font-size: 17px;
         font-weight: 600;
-        color: var(--black);
+        color: #fff;
         margin-bottom: 8px;
         letter-spacing: -0.01em;
       }
 
       .service-card p {
-        color: var(--gray);
+        color: rgba(255, 255, 255, 0.55) !important;
         font-size: 15px;
         line-height: 1.55;
-        margin-bottom: 0;
+        margin-bottom: 0 !important;
+        text-shadow: none !important;
       }
 
       /* ── Publications ── */
       .publication {
         padding: 28px 0;
-        border-bottom: 1px solid var(--border);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       }
 
       .publication:first-of-type {
-        border-top: 1px solid var(--border);
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
         margin-top: 36px;
       }
 
       .publication-title {
         font-size: 17px;
         font-weight: 500;
-        color: var(--black);
+        color: #fff;
         line-height: 1.45;
         margin-bottom: 6px;
         letter-spacing: -0.01em;
@@ -432,18 +466,18 @@
 
       .publication-meta {
         font-size: 14px;
-        color: var(--gray-light);
+        color: rgba(255, 255, 255, 0.35);
         line-height: 1.5;
       }
 
       .publication-meta .me {
-        color: var(--gray-dark);
+        color: rgba(255, 255, 255, 0.7);
         font-weight: 500;
       }
 
       .publication-venue {
         font-size: 14px;
-        color: var(--gray-light);
+        color: rgba(255, 255, 255, 0.3);
         margin-top: 2px;
       }
 
@@ -487,8 +521,8 @@
       /* ── Scroll Animations ── */
       .fade-up {
         opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.6s ease, transform 0.6s ease;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
       }
 
       .fade-up.visible {
@@ -505,6 +539,7 @@
         .hero {
           min-height: 400px;
           height: 80vh;
+          padding-top: clamp(80px, 12vh, 140px);
         }
 
         .hero-title {
@@ -515,35 +550,16 @@
           font-size: 16px;
         }
 
-        .section {
-          padding: 64px 22px;
+        .section-animated {
+          min-height: 500px;
         }
 
-        .section-heading {
-          font-size: 26px;
-          margin-bottom: 24px;
-        }
-
-        .section-split {
-          grid-template-columns: 1fr;
-          min-height: auto;
-        }
-
-        .section-split.reversed {
-          grid-template-columns: 1fr;
-        }
-
-        .section-visual {
-          min-height: 200px;
-          order: -1;
-        }
-
-        .section-split.reversed .section-visual {
-          order: -1;
-        }
-
-        .section-split .section-text {
+        .section-animated-content {
           padding: 48px 22px;
+        }
+
+        .section-animated-content h2 {
+          font-size: 28px;
         }
 
         .services-grid {
@@ -573,26 +589,23 @@
         .hero {
           min-height: 360px;
           height: 70vh;
+          padding-top: clamp(70px, 10vh, 120px);
         }
 
         .hero-title {
           font-size: 30px;
         }
 
-        .section {
-          padding: 48px 16px;
+        .section-animated {
+          min-height: 450px;
         }
 
-        .section-heading {
-          font-size: 22px;
-        }
-
-        .section-split .section-text {
+        .section-animated-content {
           padding: 40px 16px;
         }
 
-        .section-visual {
-          min-height: 160px;
+        .section-animated-content h2 {
+          font-size: 24px;
         }
       }
     </style>
@@ -628,9 +641,121 @@
       </div>
     </section>
 
-    <!-- ── Research (text + DNA visualization) ── -->
-    <section id="research" class="section-split section section-alt">
-      <div class="section-text fade-up">
+    <!-- ── Research (full-width animated cfDNA flow with text overlay) ── -->
+    <section id="research" class="section-animated">
+      <div class="section-animated-bg dark">
+        <svg viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Blood vessel walls - subtle organic curves -->
+          <path d="M0 0 Q50 200 30 400 Q10 600 50 700" stroke="rgba(255,255,255,0.04)" stroke-width="2" fill="none"/>
+          <path d="M1200 0 Q1150 200 1170 400 Q1190 600 1150 700" stroke="rgba(255,255,255,0.04)" stroke-width="2" fill="none"/>
+          <path d="M400 0 Q380 150 420 350 Q400 550 380 700" stroke="rgba(255,255,255,0.02)" stroke-width="1" fill="none"/>
+          <path d="M800 0 Q820 150 780 350 Q800 550 820 700" stroke="rgba(255,255,255,0.02)" stroke-width="1" fill="none"/>
+
+          <!-- Flowing cfDNA fragments - many more, spread across the canvas -->
+          <g style="animation: driftUp 7s linear infinite;">
+            <rect x="150" y="700" width="35" height="3" rx="1.5" fill="rgba(255,255,255,0.15)" transform="rotate(-15 167 701)"/>
+            <rect x="150" y="705" width="35" height="2.5" rx="1.25" fill="rgba(255,255,255,0.08)" transform="rotate(-15 167 706)"/>
+          </g>
+          <g style="animation: driftUp 6s linear infinite 0.5s;">
+            <rect x="350" y="700" width="28" height="3" rx="1.5" fill="rgba(255,255,255,0.12)" transform="rotate(12 364 701)"/>
+            <rect x="350" y="705" width="28" height="2.5" rx="1.25" fill="rgba(255,255,255,0.06)" transform="rotate(12 364 706)"/>
+          </g>
+          <g style="animation: driftUp 8s linear infinite 1s;">
+            <rect x="550" y="700" width="40" height="3" rx="1.5" fill="rgba(255,255,255,0.13)" transform="rotate(-8 570 701)"/>
+            <rect x="550" y="705" width="40" height="2.5" rx="1.25" fill="rgba(255,255,255,0.07)" transform="rotate(-8 570 706)"/>
+          </g>
+          <g style="animation: driftUp 6.5s linear infinite 1.5s;">
+            <rect x="750" y="700" width="30" height="3" rx="1.5" fill="rgba(255,255,255,0.14)" transform="rotate(20 765 701)"/>
+            <rect x="750" y="705" width="30" height="2.5" rx="1.25" fill="rgba(255,255,255,0.07)" transform="rotate(20 765 706)"/>
+          </g>
+          <g style="animation: driftUp 7.5s linear infinite 2s;">
+            <rect x="950" y="700" width="32" height="3" rx="1.5" fill="rgba(255,255,255,0.11)" transform="rotate(-18 966 701)"/>
+            <rect x="950" y="705" width="32" height="2.5" rx="1.25" fill="rgba(255,255,255,0.06)" transform="rotate(-18 966 706)"/>
+          </g>
+          <g style="animation: driftUp 5.5s linear infinite 2.5s;">
+            <rect x="1050" y="700" width="26" height="3" rx="1.5" fill="rgba(255,255,255,0.12)" transform="rotate(6 1063 701)"/>
+            <rect x="1050" y="705" width="26" height="2.5" rx="1.25" fill="rgba(255,255,255,0.06)" transform="rotate(6 1063 706)"/>
+          </g>
+          <g style="animation: driftUp 9s linear infinite 0.8s;">
+            <rect x="250" y="700" width="38" height="3" rx="1.5" fill="rgba(255,255,255,0.1)" transform="rotate(15 269 701)"/>
+            <rect x="250" y="705" width="38" height="2.5" rx="1.25" fill="rgba(255,255,255,0.05)" transform="rotate(15 269 706)"/>
+          </g>
+          <g style="animation: driftUp 7s linear infinite 3.5s;">
+            <rect x="650" y="700" width="34" height="3" rx="1.5" fill="rgba(255,255,255,0.11)" transform="rotate(-10 667 701)"/>
+            <rect x="650" y="705" width="34" height="2.5" rx="1.25" fill="rgba(255,255,255,0.06)" transform="rotate(-10 667 706)"/>
+          </g>
+          <g style="animation: driftUp 6s linear infinite 4s;">
+            <rect x="100" y="700" width="24" height="3" rx="1.5" fill="rgba(255,255,255,0.13)" transform="rotate(22 112 701)"/>
+            <rect x="100" y="705" width="24" height="2.5" rx="1.25" fill="rgba(255,255,255,0.07)" transform="rotate(22 112 706)"/>
+          </g>
+          <g style="animation: driftUp 8.5s linear infinite 4.5s;">
+            <rect x="850" y="700" width="36" height="3" rx="1.5" fill="rgba(255,255,255,0.1)" transform="rotate(-5 868 701)"/>
+            <rect x="850" y="705" width="36" height="2.5" rx="1.25" fill="rgba(255,255,255,0.05)" transform="rotate(-5 868 706)"/>
+          </g>
+
+          <!-- Cancer signal fragments (highlighted blue, pulsing) -->
+          <g style="animation: driftUp 6.5s linear infinite 2s;">
+            <rect x="450" y="700" width="32" height="3" rx="1.5" fill="rgba(100,180,255,0.45)" transform="rotate(5 466 701)"/>
+            <rect x="450" y="705" width="32" height="2.5" rx="1.25" fill="rgba(100,180,255,0.25)" transform="rotate(5 466 706)"/>
+            <circle cx="466" cy="703" r="4" fill="rgba(100,180,255,0.3)" style="animation: signalPulse 1.5s ease-in-out infinite;"/>
+            <circle cx="466" cy="703" r="4" fill="none" stroke="rgba(100,180,255,0.2)" style="animation: ripple 2s ease-out infinite;"/>
+          </g>
+          <g style="animation: driftUp 7s linear infinite 4.2s;">
+            <rect x="700" y="700" width="36" height="3" rx="1.5" fill="rgba(100,180,255,0.45)" transform="rotate(-12 718 701)"/>
+            <rect x="700" y="705" width="36" height="2.5" rx="1.25" fill="rgba(100,180,255,0.25)" transform="rotate(-12 718 706)"/>
+            <circle cx="718" cy="703" r="4" fill="rgba(100,180,255,0.3)" style="animation: signalPulse 1.5s ease-in-out infinite 0.4s;"/>
+            <circle cx="718" cy="703" r="4" fill="none" stroke="rgba(100,180,255,0.2)" style="animation: ripple 2s ease-out infinite 0.4s;"/>
+          </g>
+          <g style="animation: driftUp 5.8s linear infinite 5.5s;">
+            <rect x="200" y="700" width="28" height="3" rx="1.5" fill="rgba(100,180,255,0.4)" transform="rotate(18 214 701)"/>
+            <rect x="200" y="705" width="28" height="2.5" rx="1.25" fill="rgba(100,180,255,0.2)" transform="rotate(18 214 706)"/>
+            <circle cx="214" cy="703" r="4" fill="rgba(100,180,255,0.3)" style="animation: signalPulse 1.5s ease-in-out infinite 0.8s;"/>
+            <circle cx="214" cy="703" r="4" fill="none" stroke="rgba(100,180,255,0.15)" style="animation: ripple 2.5s ease-out infinite 0.8s;"/>
+          </g>
+          <g style="animation: driftUp 7.5s linear infinite 6s;">
+            <rect x="1000" y="700" width="30" height="3" rx="1.5" fill="rgba(100,180,255,0.4)" transform="rotate(-7 1015 701)"/>
+            <rect x="1000" y="705" width="30" height="2.5" rx="1.25" fill="rgba(100,180,255,0.2)" transform="rotate(-7 1015 706)"/>
+            <circle cx="1015" cy="703" r="4" fill="rgba(100,180,255,0.3)" style="animation: signalPulse 1.5s ease-in-out infinite 1.2s;"/>
+          </g>
+
+          <!-- Detection scan zone - horizontal lines sweeping -->
+          <line x1="0" y1="300" x2="1200" y2="300" stroke="rgba(100,180,255,0.08)" stroke-width="1" stroke-dasharray="8 6" style="animation: pulse 2.5s ease-in-out infinite;"/>
+          <line x1="0" y1="320" x2="1200" y2="320" stroke="rgba(100,180,255,0.06)" stroke-width="0.5" stroke-dasharray="4 4" style="animation: pulse 2.5s ease-in-out infinite 0.4s;"/>
+          <line x1="0" y1="340" x2="1200" y2="340" stroke="rgba(100,180,255,0.08)" stroke-width="1" stroke-dasharray="8 6" style="animation: pulse 2.5s ease-in-out infinite 0.8s;"/>
+          <line x1="0" y1="360" x2="1200" y2="360" stroke="rgba(100,180,255,0.05)" stroke-width="0.5" stroke-dasharray="4 4" style="animation: pulse 2.5s ease-in-out infinite 1.2s;"/>
+
+          <!-- Red blood cells floating in background -->
+          <g style="animation: cellDrift 12s ease-in-out infinite;">
+            <circle cx="100" cy="150" r="18" fill="none" stroke="rgba(255,255,255,0.025)" stroke-width="2"/>
+            <circle cx="100" cy="150" r="6" fill="rgba(255,255,255,0.01)"/>
+          </g>
+          <g style="animation: cellDrift 15s ease-in-out infinite 2s;">
+            <circle cx="350" cy="450" r="20" fill="none" stroke="rgba(255,255,255,0.025)" stroke-width="2"/>
+            <circle cx="350" cy="450" r="7" fill="rgba(255,255,255,0.01)"/>
+          </g>
+          <g style="animation: cellDrift 10s ease-in-out infinite 4s;">
+            <circle cx="700" cy="200" r="16" fill="none" stroke="rgba(255,255,255,0.025)" stroke-width="2"/>
+            <circle cx="700" cy="200" r="5" fill="rgba(255,255,255,0.01)"/>
+          </g>
+          <g style="animation: cellDrift 14s ease-in-out infinite 6s;">
+            <circle cx="900" cy="500" r="22" fill="none" stroke="rgba(255,255,255,0.025)" stroke-width="2"/>
+            <circle cx="900" cy="500" r="7" fill="rgba(255,255,255,0.01)"/>
+          </g>
+          <g style="animation: cellDrift 11s ease-in-out infinite 3s;">
+            <circle cx="1100" cy="300" r="17" fill="none" stroke="rgba(255,255,255,0.02)" stroke-width="2"/>
+            <circle cx="1100" cy="300" r="6" fill="rgba(255,255,255,0.01)"/>
+          </g>
+          <g style="animation: cellDrift 13s ease-in-out infinite 5s;">
+            <circle cx="500" cy="100" r="19" fill="none" stroke="rgba(255,255,255,0.02)" stroke-width="2"/>
+            <circle cx="500" cy="100" r="6" fill="rgba(255,255,255,0.01)"/>
+          </g>
+          <g style="animation: cellDrift 16s ease-in-out infinite 1s;">
+            <circle cx="200" cy="600" r="21" fill="none" stroke="rgba(255,255,255,0.02)" stroke-width="2"/>
+            <circle cx="200" cy="600" r="7" fill="rgba(255,255,255,0.01)"/>
+          </g>
+        </svg>
+      </div>
+      <div class="section-animated-content fade-up">
         <div class="section-label">Research</div>
         <h2>Early detection saves lives.</h2>
         <p>Cancer detected early is often curable. Detected late, it's frequently fatal. The difference between stage 1 and stage 4 is survival.</p>
@@ -638,128 +763,127 @@
         <p>I'm building a system to make this accessible: liquid biopsy analysis that integrates into routine blood work, catching cancers at stage 1 when survival rates are dramatically higher.</p>
         <p class="note">Currently developing the prototype. Consulting on AI systems to fund the R&D.</p>
       </div>
-      <div class="section-visual fade-up">
-        <!-- Liquid biopsy: cfDNA fragments flowing through blood with cancer signal detection -->
-        <svg viewBox="0 0 200 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Blood vessel walls -->
-          <path d="M30 0 Q25 100 35 200 Q28 300 32 400" stroke="rgba(255,255,255,0.08)" stroke-width="1" fill="none"/>
-          <path d="M170 0 Q175 100 165 200 Q172 300 168 400" stroke="rgba(255,255,255,0.08)" stroke-width="1" fill="none"/>
-
-          <!-- Flowing cfDNA fragments (small double-stranded segments) -->
-          <g style="animation: driftUp 8s linear infinite;">
-            <rect x="70" y="390" width="28" height="3" rx="1.5" fill="rgba(255,255,255,0.2)" transform="rotate(-15 84 391)"/>
-            <rect x="70" y="395" width="28" height="3" rx="1.5" fill="rgba(255,255,255,0.12)" transform="rotate(-15 84 396)"/>
-          </g>
-          <g style="animation: driftUp 8s linear infinite 1.5s;">
-            <rect x="105" y="390" width="22" height="3" rx="1.5" fill="rgba(255,255,255,0.2)" transform="rotate(10 116 391)"/>
-            <rect x="105" y="395" width="22" height="3" rx="1.5" fill="rgba(255,255,255,0.12)" transform="rotate(10 116 396)"/>
-          </g>
-          <g style="animation: driftUp 8s linear infinite 3s;">
-            <rect x="55" y="390" width="32" height="3" rx="1.5" fill="rgba(255,255,255,0.2)" transform="rotate(-8 71 391)"/>
-            <rect x="55" y="395" width="32" height="3" rx="1.5" fill="rgba(255,255,255,0.12)" transform="rotate(-8 71 396)"/>
-          </g>
-          <!-- Cancer signal fragment (highlighted) -->
-          <g style="animation: driftUp 8s linear infinite 4.5s;">
-            <rect x="85" y="390" width="26" height="3" rx="1.5" fill="rgba(100,180,255,0.5)" transform="rotate(5 98 391)"/>
-            <rect x="85" y="395" width="26" height="3" rx="1.5" fill="rgba(100,180,255,0.3)" transform="rotate(5 98 396)"/>
-            <circle cx="98" cy="393" r="3" fill="rgba(100,180,255,0.4)" style="animation: signalPulse 2s ease-in-out infinite;"/>
-          </g>
-          <g style="animation: driftUp 8s linear infinite 5.5s;">
-            <rect x="120" y="390" width="20" height="3" rx="1.5" fill="rgba(255,255,255,0.2)" transform="rotate(-20 130 391)"/>
-            <rect x="120" y="395" width="20" height="3" rx="1.5" fill="rgba(255,255,255,0.12)" transform="rotate(-20 130 396)"/>
-          </g>
-          <g style="animation: driftUp 8s linear infinite 6.5s;">
-            <rect x="65" y="390" width="24" height="3" rx="1.5" fill="rgba(255,255,255,0.2)" transform="rotate(12 77 391)"/>
-            <rect x="65" y="395" width="24" height="3" rx="1.5" fill="rgba(255,255,255,0.12)" transform="rotate(12 77 396)"/>
-          </g>
-          <!-- Second cancer signal fragment -->
-          <g style="animation: driftUp 8s linear infinite 7.2s;">
-            <rect x="95" y="390" width="30" height="3" rx="1.5" fill="rgba(100,180,255,0.5)" transform="rotate(-12 110 391)"/>
-            <rect x="95" y="395" width="30" height="3" rx="1.5" fill="rgba(100,180,255,0.3)" transform="rotate(-12 110 396)"/>
-            <circle cx="110" cy="393" r="3" fill="rgba(100,180,255,0.4)" style="animation: signalPulse 2s ease-in-out infinite 0.5s;"/>
-          </g>
-
-          <!-- Detection zone (scanning line) -->
-          <line x1="35" y1="190" x2="165" y2="190" stroke="rgba(100,180,255,0.15)" stroke-width="0.5" stroke-dasharray="4 3" style="animation: pulse 3s ease-in-out infinite;"/>
-          <line x1="35" y1="210" x2="165" y2="210" stroke="rgba(100,180,255,0.15)" stroke-width="0.5" stroke-dasharray="4 3" style="animation: pulse 3s ease-in-out infinite 0.3s;"/>
-
-          <!-- Subtle red blood cells (background context) -->
-          <circle cx="50" cy="80" r="8" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1.5"/>
-          <circle cx="145" cy="150" r="7" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1.5"/>
-          <circle cx="80" cy="300" r="9" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1.5"/>
-          <circle cx="130" cy="50" r="7" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1.5"/>
-          <circle cx="60" cy="230" r="8" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1.5"/>
-          <circle cx="150" cy="330" r="7" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1.5"/>
-        </svg>
-      </div>
     </section>
 
-    <!-- ── Services (network visualization + text) ── -->
-    <section id="services" class="section-split section reversed">
-      <div class="section-visual fade-up">
-        <!-- Deep learning neural network with animated signal propagation -->
-        <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Connection lines (input → hidden1) with animated dashes -->
-          <line x1="50" y1="60" x2="120" y2="75" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="3 3" style="animation: dashFlow 2s linear infinite;"/>
-          <line x1="50" y1="60" x2="120" y2="120" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-          <line x1="50" y1="60" x2="120" y2="165" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-          <line x1="50" y1="120" x2="120" y2="75" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-          <line x1="50" y1="120" x2="120" y2="120" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="3 3" style="animation: dashFlow 2s linear infinite 0.3s;"/>
-          <line x1="50" y1="120" x2="120" y2="165" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-          <line x1="50" y1="180" x2="120" y2="120" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-          <line x1="50" y1="180" x2="120" y2="165" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="3 3" style="animation: dashFlow 2s linear infinite 0.6s;"/>
-          <line x1="50" y1="180" x2="120" y2="210" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-          <line x1="50" y1="240" x2="120" y2="210" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="3 3" style="animation: dashFlow 2s linear infinite 0.9s;"/>
-          <line x1="50" y1="240" x2="120" y2="165" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+    <!-- ── Services (full-width animated neural network with text overlay) ── -->
+    <section id="services" class="section-animated">
+      <div class="section-animated-bg dark-alt">
+        <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Massive neural network spanning full width -->
+          <!-- Input layer (6 nodes, left side) -->
+          <circle cx="100" cy="100" r="6" fill="rgba(255,255,255,0.2)" style="animation: nodeGlow 3s ease-in-out infinite;"/>
+          <circle cx="100" cy="200" r="6" fill="rgba(255,255,255,0.2)" style="animation: nodeGlow 3s ease-in-out infinite 0.3s;"/>
+          <circle cx="100" cy="300" r="6" fill="rgba(255,255,255,0.2)" style="animation: nodeGlow 3s ease-in-out infinite 0.6s;"/>
+          <circle cx="100" cy="400" r="6" fill="rgba(255,255,255,0.2)" style="animation: nodeGlow 3s ease-in-out infinite 0.9s;"/>
+          <circle cx="100" cy="500" r="6" fill="rgba(255,255,255,0.2)" style="animation: nodeGlow 3s ease-in-out infinite 1.2s;"/>
+          <circle cx="100" cy="600" r="6" fill="rgba(255,255,255,0.2)" style="animation: nodeGlow 3s ease-in-out infinite 1.5s;"/>
+          <circle cx="100" cy="700" r="6" fill="rgba(255,255,255,0.2)" style="animation: nodeGlow 3s ease-in-out infinite 1.8s;"/>
 
-          <!-- Connection lines (hidden1 → hidden2) -->
-          <line x1="120" y1="75" x2="190" y2="100" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="3 3" style="animation: dashFlow 1.8s linear infinite 0.5s;"/>
-          <line x1="120" y1="75" x2="190" y2="150" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-          <line x1="120" y1="120" x2="190" y2="100" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-          <line x1="120" y1="120" x2="190" y2="150" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="3 3" style="animation: dashFlow 1.8s linear infinite 0.8s;"/>
-          <line x1="120" y1="120" x2="190" y2="200" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-          <line x1="120" y1="165" x2="190" y2="150" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-          <line x1="120" y1="165" x2="190" y2="200" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="3 3" style="animation: dashFlow 1.8s linear infinite 1.1s;"/>
-          <line x1="120" y1="210" x2="190" y2="200" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+          <!-- Hidden layer 1 (8 nodes) -->
+          <circle cx="330" cy="80" r="7" fill="rgba(100,180,255,0.15)" style="animation: nodeGlow 2.8s ease-in-out infinite 0.2s;"/>
+          <circle cx="330" cy="180" r="7" fill="rgba(100,180,255,0.15)" style="animation: nodeGlow 2.8s ease-in-out infinite 0.5s;"/>
+          <circle cx="330" cy="280" r="7" fill="rgba(100,180,255,0.15)" style="animation: nodeGlow 2.8s ease-in-out infinite 0.8s;"/>
+          <circle cx="330" cy="380" r="7" fill="rgba(100,180,255,0.15)" style="animation: nodeGlow 2.8s ease-in-out infinite 1.1s;"/>
+          <circle cx="330" cy="480" r="7" fill="rgba(100,180,255,0.15)" style="animation: nodeGlow 2.8s ease-in-out infinite 1.4s;"/>
+          <circle cx="330" cy="580" r="7" fill="rgba(100,180,255,0.15)" style="animation: nodeGlow 2.8s ease-in-out infinite 1.7s;"/>
+          <circle cx="330" cy="680" r="7" fill="rgba(100,180,255,0.15)" style="animation: nodeGlow 2.8s ease-in-out infinite 2s;"/>
 
-          <!-- Connection lines (hidden2 → output) -->
-          <line x1="190" y1="100" x2="250" y2="130" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="3 3" style="animation: dashFlow 1.5s linear infinite 1s;"/>
-          <line x1="190" y1="150" x2="250" y2="130" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="3 3" style="animation: dashFlow 1.5s linear infinite 1.3s;"/>
-          <line x1="190" y1="150" x2="250" y2="175" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-          <line x1="190" y1="200" x2="250" y2="175" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="3 3" style="animation: dashFlow 1.5s linear infinite 1.6s;"/>
+          <!-- Hidden layer 2 (6 nodes) -->
+          <circle cx="560" cy="150" r="8" fill="rgba(100,180,255,0.2)" style="animation: nodeGlow 2.5s ease-in-out infinite 0.4s;"/>
+          <circle cx="560" cy="280" r="8" fill="rgba(100,180,255,0.2)" style="animation: nodeGlow 2.5s ease-in-out infinite 0.7s;"/>
+          <circle cx="560" cy="400" r="9" fill="rgba(100,180,255,0.25)" style="animation: nodeGlow 2.5s ease-in-out infinite 1s;"/>
+          <circle cx="560" cy="520" r="8" fill="rgba(100,180,255,0.2)" style="animation: nodeGlow 2.5s ease-in-out infinite 1.3s;"/>
+          <circle cx="560" cy="640" r="8" fill="rgba(100,180,255,0.2)" style="animation: nodeGlow 2.5s ease-in-out infinite 1.6s;"/>
 
-          <!-- Input layer nodes -->
-          <circle cx="50" cy="60" r="5" fill="rgba(255,255,255,0.3)" style="animation: nodeGlow 4s ease-in-out infinite;"/>
-          <circle cx="50" cy="120" r="5" fill="rgba(255,255,255,0.3)" style="animation: nodeGlow 4s ease-in-out infinite 0.5s;"/>
-          <circle cx="50" cy="180" r="5" fill="rgba(255,255,255,0.3)" style="animation: nodeGlow 4s ease-in-out infinite 1s;"/>
-          <circle cx="50" cy="240" r="5" fill="rgba(255,255,255,0.3)" style="animation: nodeGlow 4s ease-in-out infinite 1.5s;"/>
+          <!-- Hidden layer 3 (5 nodes) -->
+          <circle cx="790" cy="200" r="8" fill="rgba(100,200,220,0.2)" style="animation: nodeGlow 2.2s ease-in-out infinite 0.3s;"/>
+          <circle cx="790" cy="330" r="9" fill="rgba(100,200,220,0.25)" style="animation: nodeGlow 2.2s ease-in-out infinite 0.6s;"/>
+          <circle cx="790" cy="460" r="9" fill="rgba(100,200,220,0.25)" style="animation: nodeGlow 2.2s ease-in-out infinite 0.9s;"/>
+          <circle cx="790" cy="590" r="8" fill="rgba(100,200,220,0.2)" style="animation: nodeGlow 2.2s ease-in-out infinite 1.2s;"/>
 
-          <!-- Hidden layer 1 nodes -->
-          <circle cx="120" cy="75" r="6" fill="rgba(100,180,255,0.25)" style="animation: nodeGlow 3.5s ease-in-out infinite 0.3s;"/>
-          <circle cx="120" cy="120" r="6" fill="rgba(100,180,255,0.25)" style="animation: nodeGlow 3.5s ease-in-out infinite 0.8s;"/>
-          <circle cx="120" cy="165" r="6" fill="rgba(100,180,255,0.25)" style="animation: nodeGlow 3.5s ease-in-out infinite 1.3s;"/>
-          <circle cx="120" cy="210" r="6" fill="rgba(100,180,255,0.25)" style="animation: nodeGlow 3.5s ease-in-out infinite 1.8s;"/>
+          <!-- Output layer (2 nodes, right side) -->
+          <circle cx="1050" cy="300" r="10" fill="rgba(100,220,180,0.3)" style="animation: nodeGlow 2s ease-in-out infinite;"/>
+          <circle cx="1050" cy="500" r="10" fill="rgba(100,220,180,0.3)" style="animation: nodeGlow 2s ease-in-out infinite 0.5s;"/>
 
-          <!-- Hidden layer 2 nodes -->
-          <circle cx="190" cy="100" r="6" fill="rgba(100,180,255,0.3)" style="animation: nodeGlow 3s ease-in-out infinite 0.6s;"/>
-          <circle cx="190" cy="150" r="7" fill="rgba(100,180,255,0.35)" style="animation: nodeGlow 3s ease-in-out infinite 1.1s;"/>
-          <circle cx="190" cy="200" r="6" fill="rgba(100,180,255,0.3)" style="animation: nodeGlow 3s ease-in-out infinite 1.6s;"/>
+          <!-- Connections: Input → Hidden1 (selected, with data streams) -->
+          <line x1="100" y1="100" x2="330" y2="80" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4 4" style="animation: dashFlowFast 2s linear infinite;"/>
+          <line x1="100" y1="100" x2="330" y2="180" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+          <line x1="100" y1="200" x2="330" y2="180" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4 4" style="animation: dashFlowFast 2s linear infinite 0.3s;"/>
+          <line x1="100" y1="200" x2="330" y2="280" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+          <line x1="100" y1="300" x2="330" y2="280" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4 4" style="animation: dashFlowFast 2s linear infinite 0.6s;"/>
+          <line x1="100" y1="300" x2="330" y2="380" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+          <line x1="100" y1="400" x2="330" y2="380" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4 4" style="animation: dashFlowFast 2s linear infinite 0.9s;"/>
+          <line x1="100" y1="400" x2="330" y2="480" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+          <line x1="100" y1="500" x2="330" y2="480" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4 4" style="animation: dashFlowFast 2s linear infinite 1.2s;"/>
+          <line x1="100" y1="500" x2="330" y2="580" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+          <line x1="100" y1="600" x2="330" y2="580" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4 4" style="animation: dashFlowFast 2s linear infinite 1.5s;"/>
+          <line x1="100" y1="600" x2="330" y2="680" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+          <line x1="100" y1="700" x2="330" y2="680" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4 4" style="animation: dashFlowFast 2s linear infinite 1.8s;"/>
+          <line x1="100" y1="100" x2="330" y2="380" stroke="rgba(255,255,255,0.015)" stroke-width="0.5"/>
+          <line x1="100" y1="700" x2="330" y2="380" stroke="rgba(255,255,255,0.015)" stroke-width="0.5"/>
 
-          <!-- Output layer nodes -->
-          <circle cx="250" cy="130" r="7" fill="rgba(100,220,180,0.4)" style="animation: nodeGlow 2.5s ease-in-out infinite;"/>
-          <circle cx="250" cy="175" r="7" fill="rgba(100,220,180,0.4)" style="animation: nodeGlow 2.5s ease-in-out infinite 0.6s;"/>
+          <!-- Hidden1 → Hidden2 connections -->
+          <line x1="330" y1="80" x2="560" y2="150" stroke="rgba(100,180,255,0.04)" stroke-width="1" stroke-dasharray="4 4" style="animation: dashFlowFast 1.8s linear infinite 0.5s;"/>
+          <line x1="330" y1="180" x2="560" y2="150" stroke="rgba(100,180,255,0.03)" stroke-width="1"/>
+          <line x1="330" y1="180" x2="560" y2="280" stroke="rgba(100,180,255,0.04)" stroke-width="1" stroke-dasharray="4 4" style="animation: dashFlowFast 1.8s linear infinite 0.8s;"/>
+          <line x1="330" y1="280" x2="560" y2="280" stroke="rgba(100,180,255,0.03)" stroke-width="1"/>
+          <line x1="330" y1="280" x2="560" y2="400" stroke="rgba(100,180,255,0.04)" stroke-width="1" stroke-dasharray="4 4" style="animation: dashFlowFast 1.8s linear infinite 1.1s;"/>
+          <line x1="330" y1="380" x2="560" y2="400" stroke="rgba(100,180,255,0.05)" stroke-width="1" stroke-dasharray="4 4" style="animation: dashFlowFast 1.8s linear infinite 1.4s;"/>
+          <line x1="330" y1="480" x2="560" y2="400" stroke="rgba(100,180,255,0.03)" stroke-width="1"/>
+          <line x1="330" y1="480" x2="560" y2="520" stroke="rgba(100,180,255,0.04)" stroke-width="1" stroke-dasharray="4 4" style="animation: dashFlowFast 1.8s linear infinite 1.7s;"/>
+          <line x1="330" y1="580" x2="560" y2="520" stroke="rgba(100,180,255,0.03)" stroke-width="1"/>
+          <line x1="330" y1="580" x2="560" y2="640" stroke="rgba(100,180,255,0.04)" stroke-width="1" stroke-dasharray="4 4" style="animation: dashFlowFast 1.8s linear infinite 2s;"/>
+          <line x1="330" y1="680" x2="560" y2="640" stroke="rgba(100,180,255,0.03)" stroke-width="1"/>
 
-          <!-- Layer labels -->
-          <text x="50" y="275" fill="rgba(255,255,255,0.15)" font-size="8" text-anchor="middle" font-family="Inter, sans-serif">input</text>
-          <text x="155" y="245" fill="rgba(255,255,255,0.15)" font-size="8" text-anchor="middle" font-family="Inter, sans-serif">hidden</text>
-          <text x="250" y="210" fill="rgba(255,255,255,0.15)" font-size="8" text-anchor="middle" font-family="Inter, sans-serif">output</text>
+          <!-- Hidden2 → Hidden3 connections -->
+          <line x1="560" y1="150" x2="790" y2="200" stroke="rgba(100,200,220,0.05)" stroke-width="1" stroke-dasharray="4 4" style="animation: dashFlowFast 1.6s linear infinite 1s;"/>
+          <line x1="560" y1="280" x2="790" y2="200" stroke="rgba(100,200,220,0.03)" stroke-width="1"/>
+          <line x1="560" y1="280" x2="790" y2="330" stroke="rgba(100,200,220,0.05)" stroke-width="1" stroke-dasharray="4 4" style="animation: dashFlowFast 1.6s linear infinite 1.3s;"/>
+          <line x1="560" y1="400" x2="790" y2="330" stroke="rgba(100,200,220,0.04)" stroke-width="1"/>
+          <line x1="560" y1="400" x2="790" y2="460" stroke="rgba(100,200,220,0.05)" stroke-width="1" stroke-dasharray="4 4" style="animation: dashFlowFast 1.6s linear infinite 1.6s;"/>
+          <line x1="560" y1="520" x2="790" y2="460" stroke="rgba(100,200,220,0.03)" stroke-width="1"/>
+          <line x1="560" y1="520" x2="790" y2="590" stroke="rgba(100,200,220,0.05)" stroke-width="1" stroke-dasharray="4 4" style="animation: dashFlowFast 1.6s linear infinite 1.9s;"/>
+          <line x1="560" y1="640" x2="790" y2="590" stroke="rgba(100,200,220,0.03)" stroke-width="1"/>
+
+          <!-- Hidden3 → Output connections -->
+          <line x1="790" y1="200" x2="1050" y2="300" stroke="rgba(100,220,180,0.06)" stroke-width="1.5" stroke-dasharray="4 4" style="animation: dashFlowFast 1.4s linear infinite 1.5s;"/>
+          <line x1="790" y1="330" x2="1050" y2="300" stroke="rgba(100,220,180,0.06)" stroke-width="1.5" stroke-dasharray="4 4" style="animation: dashFlowFast 1.4s linear infinite 1.8s;"/>
+          <line x1="790" y1="330" x2="1050" y2="500" stroke="rgba(100,220,180,0.04)" stroke-width="1"/>
+          <line x1="790" y1="460" x2="1050" y2="300" stroke="rgba(100,220,180,0.04)" stroke-width="1"/>
+          <line x1="790" y1="460" x2="1050" y2="500" stroke="rgba(100,220,180,0.06)" stroke-width="1.5" stroke-dasharray="4 4" style="animation: dashFlowFast 1.4s linear infinite 2.1s;"/>
+          <line x1="790" y1="590" x2="1050" y2="500" stroke="rgba(100,220,180,0.06)" stroke-width="1.5" stroke-dasharray="4 4" style="animation: dashFlowFast 1.4s linear infinite 2.4s;"/>
+
+          <!-- Animated data pulses traveling along connections -->
+          <circle cx="215" cy="140" r="3" fill="rgba(100,180,255,0.5)" style="animation: nodeGlow 1.5s ease-in-out infinite;">
+            <animate attributeName="cx" values="100;330" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="cy" values="100;80" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="445" cy="340" r="3" fill="rgba(100,200,220,0.5)" style="animation: nodeGlow 1.5s ease-in-out infinite 0.7s;">
+            <animate attributeName="cx" values="330;560" dur="2.2s" repeatCount="indefinite"/>
+            <animate attributeName="cy" values="380;400" dur="2.2s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="675" cy="380" r="3" fill="rgba(100,220,180,0.5)" style="animation: nodeGlow 1.5s ease-in-out infinite 1.4s;">
+            <animate attributeName="cx" values="560;790" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="cy" values="400;460" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="920" cy="400" r="4" fill="rgba(100,220,180,0.6)" style="animation: nodeGlow 1.2s ease-in-out infinite 2s;">
+            <animate attributeName="cx" values="790;1050" dur="1.8s" repeatCount="indefinite"/>
+            <animate attributeName="cy" values="460;500" dur="1.8s" repeatCount="indefinite"/>
+          </circle>
+
+          <!-- Subtle layer labels -->
+          <text x="100" y="750" fill="rgba(255,255,255,0.08)" font-size="11" text-anchor="middle" font-family="Inter, sans-serif">input</text>
+          <text x="330" y="740" fill="rgba(255,255,255,0.08)" font-size="11" text-anchor="middle" font-family="Inter, sans-serif">hidden</text>
+          <text x="560" y="700" fill="rgba(255,255,255,0.08)" font-size="11" text-anchor="middle" font-family="Inter, sans-serif">hidden</text>
+          <text x="790" y="660" fill="rgba(255,255,255,0.08)" font-size="11" text-anchor="middle" font-family="Inter, sans-serif">hidden</text>
+          <text x="1050" y="570" fill="rgba(255,255,255,0.08)" font-size="11" text-anchor="middle" font-family="Inter, sans-serif">output</text>
         </svg>
       </div>
-      <div class="section-text fade-up">
+      <div class="section-animated-content fade-up">
         <div class="section-label">Services</div>
         <h2>AI systems that deliver.</h2>
         <p>Building toward liquid biopsy cancer detection while consulting on applied AI.</p>
-        <div class="services-grid" style="margin-top: 32px;">
+        <div class="services-grid">
           <div class="service-card">
             <h3>Data Science</h3>
             <p>ML pipelines and complex analysis for research and industry. From messy data to actionable insights.</p>
@@ -776,9 +900,134 @@
       </div>
     </section>
 
-    <!-- ── Publications (text + chart visualization) ── -->
-    <section id="publications" class="section-split section section-alt">
-      <div class="section-text fade-up">
+    <!-- ── Publications (full-width animated genomics visualization with text overlay) ── -->
+    <section id="publications" class="section-animated">
+      <div class="section-animated-bg dark">
+        <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Chromosome ideograms spanning width -->
+          <rect x="50" y="60" width="1100" height="6" rx="3" fill="rgba(255,255,255,0.04)"/>
+          <rect x="50" y="60" width="300" height="6" rx="3" fill="rgba(255,255,255,0.08)"/>
+          <rect x="500" y="60" width="200" height="6" rx="3" fill="rgba(100,180,255,0.12)"/>
+          <rect x="850" y="60" width="150" height="6" rx="3" fill="rgba(255,255,255,0.06)"/>
+
+          <!-- Second chromosome row -->
+          <rect x="50" y="80" width="1100" height="4" rx="2" fill="rgba(255,255,255,0.025)"/>
+          <rect x="200" y="80" width="180" height="4" rx="2" fill="rgba(255,255,255,0.06)"/>
+          <rect x="600" y="80" width="250" height="4" rx="2" fill="rgba(100,180,255,0.08)"/>
+
+          <!-- Coverage track labels -->
+          <text x="50" y="130" fill="rgba(255,255,255,0.08)" font-size="10" font-family="Inter, sans-serif">healthy cfDNA</text>
+          <text x="50" y="220" fill="rgba(100,180,255,0.12)" font-size="10" font-family="Inter, sans-serif">tumor signal</text>
+
+          <!-- Healthy coverage bars - genome browser style -->
+          <rect x="50" y="140" width="60" height="30" rx="2" fill="rgba(255,255,255,0.04)"/>
+          <rect x="115" y="140" width="90" height="30" rx="2" fill="rgba(255,255,255,0.06)"/>
+          <rect x="210" y="140" width="50" height="30" rx="2" fill="rgba(255,255,255,0.05)"/>
+          <rect x="265" y="140" width="80" height="30" rx="2" fill="rgba(255,255,255,0.07)"/>
+          <rect x="350" y="140" width="70" height="30" rx="2" fill="rgba(255,255,255,0.04)"/>
+          <rect x="425" y="140" width="100" height="30" rx="2" fill="rgba(255,255,255,0.06)"/>
+          <rect x="530" y="140" width="60" height="30" rx="2" fill="rgba(255,255,255,0.05)"/>
+          <rect x="595" y="140" width="110" height="30" rx="2" fill="rgba(255,255,255,0.07)"/>
+          <rect x="710" y="140" width="80" height="30" rx="2" fill="rgba(255,255,255,0.04)"/>
+          <rect x="795" y="140" width="90" height="30" rx="2" fill="rgba(255,255,255,0.06)"/>
+          <rect x="890" y="140" width="70" height="30" rx="2" fill="rgba(255,255,255,0.05)"/>
+          <rect x="965" y="140" width="100" height="30" rx="2" fill="rgba(255,255,255,0.04)"/>
+          <rect x="1070" y="140" width="80" height="30" rx="2" fill="rgba(255,255,255,0.06)"/>
+
+          <!-- Cancer signal track - with pulsing highlights -->
+          <rect x="50" y="230" width="60" height="30" rx="2" fill="rgba(255,255,255,0.025)"/>
+          <rect x="115" y="230" width="90" height="30" rx="2" fill="rgba(255,255,255,0.04)"/>
+          <rect x="210" y="230" width="50" height="30" rx="2" fill="rgba(100,180,255,0.12)" style="animation: fadeInOut 3s ease-in-out infinite;"/>
+          <rect x="265" y="230" width="80" height="30" rx="2" fill="rgba(100,180,255,0.2)" style="animation: fadeInOut 3s ease-in-out infinite 0.3s;"/>
+          <rect x="350" y="230" width="70" height="30" rx="2" fill="rgba(100,180,255,0.18)" style="animation: fadeInOut 3s ease-in-out infinite 0.6s;"/>
+          <rect x="425" y="230" width="100" height="30" rx="2" fill="rgba(255,255,255,0.035)"/>
+          <rect x="530" y="230" width="60" height="30" rx="2" fill="rgba(255,255,255,0.03)"/>
+          <rect x="595" y="230" width="110" height="30" rx="2" fill="rgba(100,180,255,0.15)" style="animation: fadeInOut 3.5s ease-in-out infinite 1s;"/>
+          <rect x="710" y="230" width="80" height="30" rx="2" fill="rgba(100,180,255,0.22)" style="animation: fadeInOut 3.5s ease-in-out infinite 1.3s;"/>
+          <rect x="795" y="230" width="90" height="30" rx="2" fill="rgba(255,255,255,0.03)"/>
+          <rect x="890" y="230" width="70" height="30" rx="2" fill="rgba(255,255,255,0.04)"/>
+          <rect x="965" y="230" width="100" height="30" rx="2" fill="rgba(100,180,255,0.12)" style="animation: fadeInOut 4s ease-in-out infinite 1.8s;"/>
+          <rect x="1070" y="230" width="80" height="30" rx="2" fill="rgba(255,255,255,0.025)"/>
+
+          <!-- Separator -->
+          <line x1="50" y1="290" x2="1150" y2="290" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+
+          <!-- Fragment size distribution - large, spanning width -->
+          <text x="50" y="320" fill="rgba(255,255,255,0.08)" font-size="10" font-family="Inter, sans-serif">fragment size distribution</text>
+          <!-- Healthy distribution curve -->
+          <path d="M50 500 Q150 498 250 490 Q350 460 450 400 Q500 370 550 340 Q580 325 600 330 Q620 325 650 340 Q700 370 750 400 Q850 460 950 490 Q1050 498 1150 500" stroke="rgba(255,255,255,0.12)" stroke-width="2" fill="none"/>
+          <!-- Cancer distribution (shifted, broader, animated) -->
+          <path d="M50 500 Q150 497 250 485 Q330 455 420 400 Q480 365 540 345 Q570 335 590 338 Q610 335 640 345 Q700 365 780 400 Q870 455 950 485 Q1050 497 1150 500" stroke="rgba(100,180,255,0.2)" stroke-width="2" fill="none" stroke-dasharray="6 3" style="animation: dashFlowFast 4s linear infinite;"/>
+          <!-- Baseline -->
+          <line x1="50" y1="500" x2="1150" y2="500" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+          <!-- Peak markers -->
+          <circle cx="600" cy="330" r="4" fill="rgba(255,255,255,0.2)"/>
+          <circle cx="590" cy="338" r="4" fill="rgba(100,180,255,0.3)" style="animation: signalPulse 2s ease-in-out infinite;"/>
+          <line x1="600" y1="330" x2="600" y2="500" stroke="rgba(255,255,255,0.03)" stroke-width="0.5" stroke-dasharray="3 3"/>
+          <text x="600" y="518" fill="rgba(255,255,255,0.06)" font-size="9" text-anchor="middle" font-family="Inter, sans-serif">167bp</text>
+
+          <!-- Methylation heatmap - large grid -->
+          <text x="50" y="560" fill="rgba(255,255,255,0.08)" font-size="10" font-family="Inter, sans-serif">methylation pattern</text>
+          <!-- Row 1 -->
+          <rect x="50" y="575" width="22" height="18" rx="2" fill="rgba(255,255,255,0.03)"/>
+          <rect x="76" y="575" width="22" height="18" rx="2" fill="rgba(255,255,255,0.05)"/>
+          <rect x="102" y="575" width="22" height="18" rx="2" fill="rgba(255,255,255,0.02)"/>
+          <rect x="128" y="575" width="22" height="18" rx="2" fill="rgba(255,255,255,0.06)"/>
+          <rect x="154" y="575" width="22" height="18" rx="2" fill="rgba(100,180,255,0.1)"/>
+          <rect x="180" y="575" width="22" height="18" rx="2" fill="rgba(100,180,255,0.2)" style="animation: fadeInOut 4s ease-in-out infinite 0.2s;"/>
+          <rect x="206" y="575" width="22" height="18" rx="2" fill="rgba(100,180,255,0.25)" style="animation: fadeInOut 4s ease-in-out infinite 0.4s;"/>
+          <rect x="232" y="575" width="22" height="18" rx="2" fill="rgba(100,180,255,0.18)" style="animation: fadeInOut 4s ease-in-out infinite 0.6s;"/>
+          <rect x="258" y="575" width="22" height="18" rx="2" fill="rgba(255,255,255,0.04)"/>
+          <rect x="284" y="575" width="22" height="18" rx="2" fill="rgba(255,255,255,0.03)"/>
+          <rect x="310" y="575" width="22" height="18" rx="2" fill="rgba(255,255,255,0.05)"/>
+          <rect x="336" y="575" width="22" height="18" rx="2" fill="rgba(255,255,255,0.02)"/>
+          <rect x="362" y="575" width="22" height="18" rx="2" fill="rgba(100,180,255,0.12)" style="animation: fadeInOut 4.5s ease-in-out infinite 1s;"/>
+          <rect x="388" y="575" width="22" height="18" rx="2" fill="rgba(100,180,255,0.18)" style="animation: fadeInOut 4.5s ease-in-out infinite 1.2s;"/>
+          <rect x="414" y="575" width="22" height="18" rx="2" fill="rgba(255,255,255,0.04)"/>
+          <!-- Row 2 -->
+          <rect x="50" y="597" width="22" height="18" rx="2" fill="rgba(255,255,255,0.04)"/>
+          <rect x="76" y="597" width="22" height="18" rx="2" fill="rgba(255,255,255,0.03)"/>
+          <rect x="102" y="597" width="22" height="18" rx="2" fill="rgba(255,255,255,0.05)"/>
+          <rect x="128" y="597" width="22" height="18" rx="2" fill="rgba(100,180,255,0.08)"/>
+          <rect x="154" y="597" width="22" height="18" rx="2" fill="rgba(100,180,255,0.15)" style="animation: fadeInOut 3.8s ease-in-out infinite 0.3s;"/>
+          <rect x="180" y="597" width="22" height="18" rx="2" fill="rgba(100,180,255,0.28)" style="animation: fadeInOut 3.8s ease-in-out infinite 0.5s;"/>
+          <rect x="206" y="597" width="22" height="18" rx="2" fill="rgba(100,180,255,0.22)" style="animation: fadeInOut 3.8s ease-in-out infinite 0.7s;"/>
+          <rect x="232" y="597" width="22" height="18" rx="2" fill="rgba(100,180,255,0.12)" style="animation: fadeInOut 3.8s ease-in-out infinite 0.9s;"/>
+          <rect x="258" y="597" width="22" height="18" rx="2" fill="rgba(255,255,255,0.03)"/>
+          <rect x="284" y="597" width="22" height="18" rx="2" fill="rgba(255,255,255,0.05)"/>
+          <rect x="310" y="597" width="22" height="18" rx="2" fill="rgba(255,255,255,0.02)"/>
+          <rect x="336" y="597" width="22" height="18" rx="2" fill="rgba(100,180,255,0.1)" style="animation: fadeInOut 4.2s ease-in-out infinite 1.3s;"/>
+          <rect x="362" y="597" width="22" height="18" rx="2" fill="rgba(100,180,255,0.2)" style="animation: fadeInOut 4.2s ease-in-out infinite 1.5s;"/>
+          <rect x="388" y="597" width="22" height="18" rx="2" fill="rgba(100,180,255,0.15)" style="animation: fadeInOut 4.2s ease-in-out infinite 1.7s;"/>
+          <rect x="414" y="597" width="22" height="18" rx="2" fill="rgba(255,255,255,0.03)"/>
+
+          <!-- Extended heatmap rows for more visual impact -->
+          <!-- Row 3 -->
+          <rect x="50" y="619" width="22" height="18" rx="2" fill="rgba(255,255,255,0.02)"/>
+          <rect x="76" y="619" width="22" height="18" rx="2" fill="rgba(255,255,255,0.04)"/>
+          <rect x="102" y="619" width="22" height="18" rx="2" fill="rgba(255,255,255,0.06)"/>
+          <rect x="128" y="619" width="22" height="18" rx="2" fill="rgba(100,180,255,0.12)" style="animation: fadeInOut 4s ease-in-out infinite 0.8s;"/>
+          <rect x="154" y="619" width="22" height="18" rx="2" fill="rgba(100,180,255,0.2)" style="animation: fadeInOut 4s ease-in-out infinite 1s;"/>
+          <rect x="180" y="619" width="22" height="18" rx="2" fill="rgba(100,180,255,0.15)" style="animation: fadeInOut 4s ease-in-out infinite 1.2s;"/>
+          <rect x="206" y="619" width="22" height="18" rx="2" fill="rgba(255,255,255,0.04)"/>
+          <rect x="232" y="619" width="22" height="18" rx="2" fill="rgba(255,255,255,0.03)"/>
+          <rect x="258" y="619" width="22" height="18" rx="2" fill="rgba(255,255,255,0.05)"/>
+          <rect x="284" y="619" width="22" height="18" rx="2" fill="rgba(100,180,255,0.08)"/>
+          <rect x="310" y="619" width="22" height="18" rx="2" fill="rgba(100,180,255,0.18)" style="animation: fadeInOut 3.5s ease-in-out infinite 1.6s;"/>
+          <rect x="336" y="619" width="22" height="18" rx="2" fill="rgba(100,180,255,0.22)" style="animation: fadeInOut 3.5s ease-in-out infinite 1.8s;"/>
+          <rect x="362" y="619" width="22" height="18" rx="2" fill="rgba(100,180,255,0.1)"/>
+          <rect x="388" y="619" width="22" height="18" rx="2" fill="rgba(255,255,255,0.03)"/>
+          <rect x="414" y="619" width="22" height="18" rx="2" fill="rgba(255,255,255,0.02)"/>
+
+          <!-- Additional floating particles for dynamism -->
+          <circle cx="800" cy="400" r="2" fill="rgba(100,180,255,0.3)" style="animation: particleFloat 5s ease-in-out infinite; --tx: 60px; --ty: -100px;"/>
+          <circle cx="900" cy="350" r="1.5" fill="rgba(100,180,255,0.25)" style="animation: particleFloat 6s ease-in-out infinite 1s; --tx: -40px; --ty: -80px;"/>
+          <circle cx="1000" cy="450" r="2" fill="rgba(100,180,255,0.2)" style="animation: particleFloat 7s ease-in-out infinite 2s; --tx: 30px; --ty: -120px;"/>
+          <circle cx="700" cy="500" r="1.5" fill="rgba(100,180,255,0.3)" style="animation: particleFloat 5.5s ease-in-out infinite 3s; --tx: -50px; --ty: -90px;"/>
+          <circle cx="850" cy="550" r="2" fill="rgba(100,180,255,0.2)" style="animation: particleFloat 6.5s ease-in-out infinite 4s; --tx: 70px; --ty: -70px;"/>
+        </svg>
+      </div>
+      <div class="section-animated-content fade-up">
         <div class="section-label">Publications</div>
         <h2>Peer-reviewed research.</h2>
 
@@ -799,69 +1048,6 @@
           <div class="publication-meta">Van Wagensveld L, Van Baal JOAM, Timmermans M, <span class="me">Gaillard D</span>, Borghuis L, Coffelt SB, Rosenberg EH, Lok CAR, Nijman HW, Kooreman LFS</div>
           <div class="publication-venue">Cancers, 2022</div>
         </div>
-      </div>
-      <div class="section-visual fade-up" style="background: var(--gray-dark);">
-        <!-- Genomic cfDNA fragmentation pattern (fragmentomics visualization) -->
-        <svg viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Chromosome ideogram (stylized) -->
-          <rect x="20" y="30" width="160" height="4" rx="2" fill="rgba(255,255,255,0.08)"/>
-          <rect x="20" y="30" width="45" height="4" rx="2" fill="rgba(255,255,255,0.15)"/>
-          <rect x="90" y="30" width="30" height="4" rx="2" fill="rgba(100,180,255,0.2)"/>
-
-          <!-- cfDNA fragment coverage tracks (like a genome browser) -->
-          <!-- Track 1: Healthy signal -->
-          <text x="20" y="58" fill="rgba(255,255,255,0.12)" font-size="6" font-family="Inter, sans-serif">healthy</text>
-          <rect x="20" y="62" width="18" height="14" rx="1" fill="rgba(255,255,255,0.08)"/>
-          <rect x="40" y="62" width="30" height="14" rx="1" fill="rgba(255,255,255,0.12)"/>
-          <rect x="72" y="62" width="14" height="14" rx="1" fill="rgba(255,255,255,0.10)"/>
-          <rect x="88" y="62" width="24" height="14" rx="1" fill="rgba(255,255,255,0.14)"/>
-          <rect x="114" y="62" width="20" height="14" rx="1" fill="rgba(255,255,255,0.09)"/>
-          <rect x="136" y="62" width="28" height="14" rx="1" fill="rgba(255,255,255,0.11)"/>
-          <rect x="166" y="62" width="14" height="14" rx="1" fill="rgba(255,255,255,0.07)"/>
-
-          <!-- Track 2: Cancer signal (shows differential pattern) -->
-          <text x="20" y="98" fill="rgba(100,180,255,0.2)" font-size="6" font-family="Inter, sans-serif">cancer</text>
-          <rect x="20" y="102" width="18" height="14" rx="1" fill="rgba(255,255,255,0.06)"/>
-          <rect x="40" y="102" width="30" height="14" rx="1" fill="rgba(255,255,255,0.08)"/>
-          <rect x="72" y="102" width="14" height="14" rx="1" fill="rgba(100,180,255,0.2)"/>
-          <rect x="88" y="102" width="24" height="14" rx="1" fill="rgba(100,180,255,0.3)" style="animation: fadeInOut 3s ease-in-out infinite;"/>
-          <rect x="114" y="102" width="20" height="14" rx="1" fill="rgba(100,180,255,0.25)" style="animation: fadeInOut 3s ease-in-out infinite 0.5s;"/>
-          <rect x="136" y="102" width="28" height="14" rx="1" fill="rgba(255,255,255,0.07)"/>
-          <rect x="166" y="102" width="14" height="14" rx="1" fill="rgba(255,255,255,0.05)"/>
-
-          <!-- Separator -->
-          <line x1="20" y1="135" x2="180" y2="135" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
-
-          <!-- Fragment size distribution curve -->
-          <text x="20" y="152" fill="rgba(255,255,255,0.12)" font-size="6" font-family="Inter, sans-serif">fragment size</text>
-          <!-- Healthy distribution (sharp peak at ~167bp) -->
-          <path d="M25 220 Q40 218 55 215 Q70 200 85 170 Q92 158 100 160 Q108 158 115 170 Q130 200 145 215 Q160 218 175 220" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" fill="none"/>
-          <!-- Cancer distribution (shifted, broader) -->
-          <path d="M25 220 Q40 217 55 210 Q65 195 78 175 Q86 165 95 168 Q104 165 112 175 Q125 195 145 210 Q160 217 175 220" stroke="rgba(100,180,255,0.3)" stroke-width="1.5" fill="none" stroke-dasharray="4 2" style="animation: dashFlow 3s linear infinite;"/>
-          <!-- Baseline -->
-          <line x1="25" y1="220" x2="175" y2="220" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
-          <!-- Peak annotations -->
-          <circle cx="100" cy="160" r="2" fill="rgba(255,255,255,0.3)"/>
-          <circle cx="95" cy="168" r="2" fill="rgba(100,180,255,0.4)" style="animation: signalPulse 2.5s ease-in-out infinite;"/>
-          <line x1="100" y1="160" x2="100" y2="220" stroke="rgba(255,255,255,0.05)" stroke-width="0.5" stroke-dasharray="2 2"/>
-          <text x="100" y="230" fill="rgba(255,255,255,0.1)" font-size="5" text-anchor="middle" font-family="Inter, sans-serif">167bp</text>
-
-          <!-- Methylation heatmap (bottom) -->
-          <text x="20" y="248" fill="rgba(255,255,255,0.12)" font-size="6" font-family="Inter, sans-serif">methylation</text>
-          <rect x="20" y="253" width="10" height="10" rx="1" fill="rgba(255,255,255,0.06)"/>
-          <rect x="32" y="253" width="10" height="10" rx="1" fill="rgba(255,255,255,0.1)"/>
-          <rect x="44" y="253" width="10" height="10" rx="1" fill="rgba(255,255,255,0.04)"/>
-          <rect x="56" y="253" width="10" height="10" rx="1" fill="rgba(255,255,255,0.12)"/>
-          <rect x="68" y="253" width="10" height="10" rx="1" fill="rgba(100,180,255,0.2)"/>
-          <rect x="80" y="253" width="10" height="10" rx="1" fill="rgba(100,180,255,0.35)" style="animation: fadeInOut 4s ease-in-out infinite 0.3s;"/>
-          <rect x="92" y="253" width="10" height="10" rx="1" fill="rgba(100,180,255,0.3)" style="animation: fadeInOut 4s ease-in-out infinite 0.6s;"/>
-          <rect x="104" y="253" width="10" height="10" rx="1" fill="rgba(100,180,255,0.25)" style="animation: fadeInOut 4s ease-in-out infinite 0.9s;"/>
-          <rect x="116" y="253" width="10" height="10" rx="1" fill="rgba(255,255,255,0.08)"/>
-          <rect x="128" y="253" width="10" height="10" rx="1" fill="rgba(255,255,255,0.05)"/>
-          <rect x="140" y="253" width="10" height="10" rx="1" fill="rgba(255,255,255,0.1)"/>
-          <rect x="152" y="253" width="10" height="10" rx="1" fill="rgba(255,255,255,0.04)"/>
-          <rect x="164" y="253" width="10" height="10" rx="1" fill="rgba(255,255,255,0.07)"/>
-        </svg>
       </div>
     </section>
 
