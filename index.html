@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Gaillard Systems - AI for Early Cancer Detection</title>
     <meta name="description" content="Building affordable deep learning systems for liquid biopsy cancer detection. PhD researcher at Netherlands Cancer Institute specializing in cell-free DNA analysis." />
+    <meta property="og:title" content="Gaillard Systems - AI for Early Cancer Detection" />
+    <meta property="og:description" content="Building affordable deep learning systems for liquid biopsy cancer detection. PhD researcher at Netherlands Cancer Institute specializing in cell-free DNA analysis." />
+    <meta property="og:image" content="https://gaillard.systems/og-image.png" />
+    <meta property="og:url" content="https://gaillard.systems" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Gaillard Systems" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -119,27 +125,21 @@
         align-items: flex-start;
         justify-content: center;
         padding-top: clamp(100px, 15vh, 180px);
+        background: var(--black);
       }
 
-      .hero-image {
+      .hero-bg {
         position: absolute;
         inset: 0;
         width: 100%;
         height: 100%;
-        object-fit: cover;
-        object-position: center 20%;
       }
 
-      .hero-overlay {
+      .hero-bg svg {
         position: absolute;
         inset: 0;
-        background: linear-gradient(
-          to bottom,
-          rgba(29, 29, 31, 0.65) 0%,
-          rgba(29, 29, 31, 0.35) 35%,
-          rgba(29, 29, 31, 0.3) 60%,
-          rgba(29, 29, 31, 0.7) 100%
-        );
+        width: 100%;
+        height: 100%;
       }
 
       .hero-content {
@@ -483,17 +483,34 @@
 
       /* ── Footer ── */
       .site-footer {
-        padding: 48px 22px;
+        padding: 64px 22px 48px;
         border-top: 1px solid var(--border);
         text-align: center;
         background: var(--bg-alt);
+      }
+
+      .footer-profile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 24px;
+      }
+
+      .footer-photo {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: center 20%;
+        border: 3px solid var(--border);
       }
 
       .footer-logo {
         font-size: 15px;
         font-weight: 600;
         color: var(--black);
-        margin-bottom: 12px;
+        margin-bottom: 0;
         letter-spacing: -0.01em;
       }
 
@@ -627,8 +644,57 @@
 
     <!-- ── Hero ── -->
     <section class="hero">
-      <img src="duco.jpg" alt="Duco Gaillard" class="hero-image" />
-      <div class="hero-overlay"></div>
+      <div class="hero-bg">
+        <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Subtle grid lines -->
+          <line x1="0" y1="200" x2="1200" y2="200" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+          <line x1="0" y1="400" x2="1200" y2="400" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+          <line x1="0" y1="600" x2="1200" y2="600" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+          <line x1="300" y1="0" x2="300" y2="800" stroke="rgba(255,255,255,0.02)" stroke-width="1"/>
+          <line x1="600" y1="0" x2="600" y2="800" stroke="rgba(255,255,255,0.02)" stroke-width="1"/>
+          <line x1="900" y1="0" x2="900" y2="800" stroke="rgba(255,255,255,0.02)" stroke-width="1"/>
+
+          <!-- Floating DNA fragment pairs drifting gently -->
+          <g style="animation: driftUp 12s linear infinite;">
+            <rect x="200" y="800" width="40" height="3" rx="1.5" fill="rgba(100,180,255,0.2)" transform="rotate(-10 220 801)"/>
+            <rect x="200" y="806" width="40" height="2.5" rx="1.25" fill="rgba(100,180,255,0.1)" transform="rotate(-10 220 807)"/>
+          </g>
+          <g style="animation: driftUp 10s linear infinite 2s;">
+            <rect x="500" y="800" width="32" height="3" rx="1.5" fill="rgba(255,255,255,0.12)" transform="rotate(8 516 801)"/>
+            <rect x="500" y="806" width="32" height="2.5" rx="1.25" fill="rgba(255,255,255,0.06)" transform="rotate(8 516 807)"/>
+          </g>
+          <g style="animation: driftUp 14s linear infinite 4s;">
+            <rect x="800" y="800" width="36" height="3" rx="1.5" fill="rgba(100,180,255,0.18)" transform="rotate(-6 818 801)"/>
+            <rect x="800" y="806" width="36" height="2.5" rx="1.25" fill="rgba(100,180,255,0.09)" transform="rotate(-6 818 807)"/>
+          </g>
+          <g style="animation: driftUp 11s linear infinite 6s;">
+            <rect x="1000" y="800" width="28" height="3" rx="1.5" fill="rgba(255,255,255,0.1)" transform="rotate(14 1014 801)"/>
+            <rect x="1000" y="806" width="28" height="2.5" rx="1.25" fill="rgba(255,255,255,0.05)" transform="rotate(14 1014 807)"/>
+          </g>
+          <g style="animation: driftUp 13s linear infinite 3s;">
+            <rect x="350" y="800" width="34" height="3" rx="1.5" fill="rgba(255,255,255,0.1)" transform="rotate(-12 367 801)"/>
+            <rect x="350" y="806" width="34" height="2.5" rx="1.25" fill="rgba(255,255,255,0.05)" transform="rotate(-12 367 807)"/>
+          </g>
+          <g style="animation: driftUp 9s linear infinite 5s;">
+            <rect x="650" y="800" width="38" height="3" rx="1.5" fill="rgba(100,180,255,0.22)" transform="rotate(5 669 801)"/>
+            <rect x="650" y="806" width="38" height="2.5" rx="1.25" fill="rgba(100,180,255,0.12)" transform="rotate(5 669 807)"/>
+            <circle cx="669" cy="803" r="4" fill="rgba(100,180,255,0.25)" style="animation: signalPulse 2s ease-in-out infinite;"/>
+          </g>
+          <g style="animation: driftUp 15s linear infinite 7s;">
+            <rect x="100" y="800" width="30" height="3" rx="1.5" fill="rgba(100,180,255,0.15)" transform="rotate(10 115 801)"/>
+            <rect x="100" y="806" width="30" height="2.5" rx="1.25" fill="rgba(100,180,255,0.08)" transform="rotate(10 115 807)"/>
+          </g>
+          <g style="animation: driftUp 11s linear infinite 8s;">
+            <rect x="900" y="800" width="42" height="3" rx="1.5" fill="rgba(255,255,255,0.08)" transform="rotate(-4 921 801)"/>
+            <rect x="900" y="806" width="42" height="2.5" rx="1.25" fill="rgba(255,255,255,0.04)" transform="rotate(-4 921 807)"/>
+          </g>
+
+          <!-- Soft glowing accent orbs -->
+          <circle cx="300" cy="300" r="80" fill="rgba(100,180,255,0.03)" style="animation: pulse 6s ease-in-out infinite;"/>
+          <circle cx="900" cy="500" r="100" fill="rgba(100,180,255,0.02)" style="animation: pulse 8s ease-in-out infinite 2s;"/>
+          <circle cx="600" cy="150" r="60" fill="rgba(100,180,255,0.025)" style="animation: pulse 7s ease-in-out infinite 4s;"/>
+        </svg>
+      </div>
       <div class="hero-content fade-up">
         <h1 class="hero-title">AI that detects cancer before symptoms appear.</h1>
         <p class="hero-subtitle">Deep learning for liquid biopsy analysis. Making early cancer detection accessible and affordable.</p>
@@ -1053,7 +1119,10 @@
 
     <!-- ── Footer ── -->
     <footer id="contact" class="site-footer">
-      <div class="footer-logo">Gaillard Systems</div>
+      <div class="footer-profile">
+        <img src="duco.jpg" alt="Duco Gaillard" class="footer-photo" />
+        <div class="footer-logo">Gaillard Systems</div>
+      </div>
       <p class="footer-contact"><span id="email"></span></p>
       <p class="footer-note">Open to conversations about AI, cancer detection, and diagnostics.</p>
     </footer>
